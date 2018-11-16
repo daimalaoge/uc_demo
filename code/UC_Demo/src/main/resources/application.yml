@@ -1,0 +1,33 @@
+spring:
+  messages:
+    encoding: UTF-8  
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  profiles:
+    active: devp
+  http:
+    multipart:
+      max-file-size: 30Mb
+      max-request-size: 30Mb
+    encoding:
+       charset: UTF-8
+       enabled: true
+       force: true
+           
+  devtools:
+    restart:
+      enabled: true
+      
+  freemarker:
+    suffix: .html
+    template-loader-path: classpath:/templates/
+    allow-request-override: false
+    cache: false
+    check-template-location: true
+    charset: UTF-8
+    content-type: text/html
+    expose-request-attributes: false
+    expose-session-attributes: false
+    expose-spring-macro-helpers: false
+  

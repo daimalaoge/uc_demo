@@ -1,0 +1,477 @@
+<div class="layui-fluid">
+  <div class="layui-row layui-col-space15">
+    <div class="layui-col-md12">
+      <div class="layui-row layui-col-space15">
+        <div class="layui-col-md3">
+          <div class="layui-card">
+            <div class="layui-card-body">
+              访客
+            </div>
+          </div>
+        </div>
+        <div class="layui-col-md3">
+          <div class="layui-card">
+            <div class="layui-card-body">
+              新用户
+            </div>
+          </div>
+        </div>
+        <div class="layui-col-md3">
+          <div class="layui-card">
+            <div class="layui-card-body">
+              销售额
+            </div>
+          </div>
+        </div>
+        <div class="layui-col-md3">
+          <div class="layui-card">
+            <div class="layui-card-body">
+              成交量
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="layui-col-md12">
+      <div class="layui-row layui-col-space15">
+        <div class="layui-col-md8">
+          <div class="layui-row layui-col-space15">
+            <div class="layui-col-md6">
+              <div class="layui-card">
+                <div class="layui-card-header">ECharts</div>
+                <div class="layui-card-body">
+                  <div id="container1" style="height:350px;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="layui-col-md6">
+              <div class="layui-card">
+                <div class="layui-card-header">ECharts</div>
+                <div class="layui-card-body">
+                  <div id="main" style="height:350px;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="layui-col-md12">
+              <div class="layui-card">
+                <div class="layui-card-header">ECharts</div>
+                <div class="layui-card-body">
+                  <div id="main1" style="height:350px;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="layui-col-md12">
+              <div class="layui-card">
+                <div class="layui-card-header">数据统计</div>
+                <div class="layui-card-body">
+                  <table id="demo_hash" lay-filter="test_hash"></table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="layui-col-md4">
+          <div class="layui-row layui-col-space15">
+            <div class="layui-col-md12">
+              <div class="layui-card">
+                <div class="layui-card-header">快捷入口</div>
+                <div class="layui-card-body">
+                  <div class="layui-row layui-col-space5">
+                    <!-- <div class="layui-col-sm3">
+                        <div style="height:75px;  background-color:#ccc;"></div>
+                      </div>
+                      <div class="layui-col-sm3">
+                        <div style="height:75px;  background-color:#ccc;"></div>
+                      </div>
+                      <div class="layui-col-sm3">
+                        <div style="height:75px;  background-color:#ccc;"></div>
+                      </div>
+                      <div class="layui-col-sm3">
+                        <div style="height:75px;  background-color:#ccc;"></div>
+                      </div>
+                      <div class="layui-col-sm3">
+                        <div style="height:75px;  background-color:#ccc;"></div>
+                      </div>
+                      <div class="layui-col-sm3">
+                        <div style="height:75px;  background-color:#ccc;"></div>
+                      </div>
+                      <div class="layui-col-sm3">
+                        <div style="height:75px;  background-color:#ccc;"></div>
+                      </div>
+                      <div class="layui-col-sm3">
+                        <div style="height:75px;  background-color:#ccc;"></div>
+                      </div> -->
+                    <div class="layui-col-xs6 layui-col-sm6 layui-col-md4">
+                      <div style="height:75px;  background-color:#ccc;"></div>
+                    </div>
+                    <div class="layui-col-xs6 layui-col-sm6 layui-col-md4">
+                      <div style="height:75px;  background-color:#ccc;"></div>
+                    </div>
+                    <div class="layui-col-xs4 layui-col-sm12 layui-col-md4">
+                      <div style="height:75px;  background-color:#ccc;"></div>
+                    </div>
+                    <div class="layui-col-xs4 layui-col-sm7 layui-col-md8">
+                      <div style="height:75px;  background-color:#ccc;"></div>
+                    </div>
+                    <div class="layui-col-xs4 layui-col-sm5 layui-col-md4">
+                      <div style="height:75px;  background-color:#ccc;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="layui-col-md12">
+              <div class="layui-card">
+                <div class="layui-card-header">版本信息</div>
+                <div class="layui-card-body">
+                  <table class="layui-table">
+                    <colgroup>
+                      <col width="150">
+                      <col>
+                    </colgroup>
+                    <tbody>
+                      <tr>
+                        <td>版本号</td>
+                        <td>v2.0.0-beta1</td>
+                      </tr>
+                      <tr>
+                        <td>依赖</td>
+                        <td>layui v2.2.5</td>
+                      </tr>
+                      <tr>
+                        <td>作者</td>
+                        <td>Van Zheng</td>
+                      </tr>
+                      <tr>
+                        <td>邮箱</td>
+                        <td>zheng_jinfan@126.com</td>
+                      </tr>
+                      <tr>
+                        <td>交流群</td>
+                        <td>248049395</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="layui-col-md12">
+              <div class="layui-card">
+                <div class="layui-card-header">关于KITADMIN 2.0</div>
+                <div class="layui-card-body">
+                  <p>当前版本是基于layui 2.x重构的版本，与之后1.x版本有本质有区别。</p>
+                  <p>该版本的核心是[路由]，不再支持[iframe]方式的加载</p>
+                  <p>版本特性：</p>
+                  <ul>
+                    <li>1、用法一如既往的简单，快捷。(只需要简单的配置就实现一些功能).</li>
+                    <li>2、提供本地开发环境。(依赖nodejs运行环境和gulp)</li>
+                    <li>3、提供代码功能。(依赖nodejs运行环境和gulp)</li>
+                    <li>4、模块化加载。(依赖layui模块化，用法与layui保持一致)</li>
+                    <li>5、提供路由功能。(路由是本版本的核心功能了，需与模板绑定，详情请参考相关文档)</li>
+                    <li>6、完全的前后端分离开发。(集成mockjs用于拦截请求并返回模拟数据，详情请参考相关文档)</li>
+                    <li>7、左侧菜单重写，支持到4级菜单。(集成mockjs用于拦截请求并返回模拟数据，详情请参考相关文档)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  layui.config({
+    base: '/src/js/'
+  }).use(['jquery', 'mockjs', 'table', 'echarts'], function () {
+    var $ = layui.jquery,
+      layer = layui.layer,
+      table = layui.table;
+
+    //echarts
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+    // 指定图表的配置项和数据
+    var option = {
+      title: {
+        text: 'ECharts 入门示例'
+      },
+      tooltip: {},
+      legend: {
+        data: ['销量']
+      },
+      xAxis: {
+        data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+      },
+      yAxis: {},
+      series: [{
+        name: '销量',
+        type: 'bar',
+        data: [5, 20, 36, 10, 10, 20]
+      }]
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+
+    // echarts 1
+    var myChart1 = echarts.init(document.getElementById("container1"));
+    var app1 = {};
+    option1 = null;
+    app1.title = '极坐标系下的堆叠柱状图';
+
+    var data1 = genData1(50);
+
+    option1 = {
+      title: {
+        text: '同名数量统计',
+        subtext: '纯属虚构',
+        x: 'center'
+      },
+      tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+      },
+      legend: {
+        type: 'scroll',
+        orient: 'vertical',
+        right: 10,
+        top: 20,
+        bottom: 20,
+        data: data1.legendData,
+
+        selected: data1.selected
+      },
+      series: [
+        {
+          name: '姓名',
+          type: 'pie',
+          radius: '55%',
+          center: ['40%', '50%'],
+          data: data1.seriesData,
+          itemStyle: {
+            emphasis: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+          }
+        }
+      ]
+    };
+    if (option1 && typeof option1 === "object") {
+      myChart1.setOption(option1, true);
+    }
+    function genData1(count) {
+      var nameList = [
+        '赵', '钱', '孙', '李', '周', '吴', '郑', '王', '冯', '陈', '褚', '卫', '蒋', '沈', '韩', '杨', '朱', '秦', '尤', '许', '何', '吕', '施', '张', '孔', '曹', '严', '华', '金', '魏', '陶', '姜', '戚', '谢', '邹', '喻', '柏', '水', '窦', '章', '云', '苏', '潘', '葛', '奚', '范', '彭', '郎', '鲁', '韦', '昌', '马', '苗', '凤', '花', '方', '俞', '任', '袁', '柳', '酆', '鲍', '史', '唐', '费', '廉', '岑', '薛', '雷', '贺', '倪', '汤', '滕', '殷', '罗', '毕', '郝', '邬', '安', '常', '乐', '于', '时', '傅', '皮', '卞', '齐', '康', '伍', '余', '元', '卜', '顾', '孟', '平', '黄', '和', '穆', '萧', '尹', '姚', '邵', '湛', '汪', '祁', '毛', '禹', '狄', '米', '贝', '明', '臧', '计', '伏', '成', '戴', '谈', '宋', '茅', '庞', '熊', '纪', '舒', '屈', '项', '祝', '董', '梁', '杜', '阮', '蓝', '闵', '席', '季', '麻', '强', '贾', '路', '娄', '危'
+      ];
+      var legendData = [];
+      var seriesData = [];
+      var selected = {};
+      for (var i = 0; i < 50; i++) {
+        name = Math.random() > 0.65
+          ? makeWord(4, 1) + '·' + makeWord(3, 0)
+          : makeWord(2, 1);
+        legendData.push(name);
+        seriesData.push({
+          name: name,
+          value: Math.round(Math.random() * 100000)
+        });
+        selected[name] = i < 6;
+      }
+
+      return {
+        legendData: legendData,
+        seriesData: seriesData,
+        selected: selected
+      };
+
+      function makeWord(max, min) {
+        var nameLen = Math.ceil(Math.random() * max + min);
+        var name = [];
+        for (var i = 0; i < nameLen; i++) {
+          name.push(nameList[Math.round(Math.random() * nameList.length - 1)]);
+        }
+        return name.join('');
+      }
+    }
+
+    // echart2
+    var myChart2 = echarts.init(document.getElementById("main1"));
+    var app2 = {};
+    option2 = null;
+    option2 = {
+      title: {
+        text: '堆叠区域图'
+      },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross',
+          label: {
+            backgroundColor: '#6a7985'
+          }
+        }
+      },
+      legend: {
+        data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎']
+      },
+      toolbox: {
+        feature: {
+          saveAsImage: {}
+        }
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      xAxis: [{
+        type: 'category',
+        boundaryGap: false,
+        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+      }],
+      yAxis: [{
+        type: 'value'
+      }],
+      series: [{
+        name: '邮件营销',
+        type: 'line',
+        stack: '总量',
+        areaStyle: {
+          normal: {}
+        },
+        data: [120, 132, 101, 134, 90, 230, 210]
+      }, {
+        name: '联盟广告',
+        type: 'line',
+        stack: '总量',
+        areaStyle: {
+          normal: {}
+        },
+        data: [220, 182, 191, 234, 290, 330, 310]
+      }, {
+        name: '视频广告',
+        type: 'line',
+        stack: '总量',
+        areaStyle: {
+          normal: {}
+        },
+        data: [150, 232, 201, 154, 190, 330, 410]
+      }, {
+        name: '直接访问',
+        type: 'line',
+        stack: '总量',
+        areaStyle: {
+          normal: {}
+        },
+        data: [320, 332, 301, 334, 390, 330, 320]
+      }, {
+        name: '搜索引擎',
+        type: 'line',
+        stack: '总量',
+        label: {
+          normal: {
+            show: true,
+            position: 'top'
+          }
+        },
+        areaStyle: {
+          normal: {}
+        },
+        data: [820, 932, 901, 934, 1290, 1330, 1320]
+      }]
+    };;
+    if (option2 && typeof option2 === "object") {
+      myChart2.setOption(option2, true);
+    }
+
+    $(window).on('resize', function () {
+      myChart.resize();
+      myChart1.resize();
+      myChart2.resize();
+    });
+
+    // 注入mock
+    layui.mockjs.inject({
+      'POST /demo/table/user': {
+        code: 0,
+        msg: "xxx",
+        count: 1000,
+        'data|20': [{
+          'id|+1': 1,
+          username: '@name',
+          sex: '@boolean',
+          city: '@city',
+          sign: '@csentence',
+          experience: '@integer',
+          score: '@integer',
+          classify: '@word',
+          wealth: '@integer',
+          auth: '@boolean'
+        }]
+      }
+    });
+    //第一个实例
+    table.render({
+      method: 'post',
+      done: function () {
+        $('#demo_hash').next().css('height', 'auto');
+      },
+      limit: 20,
+      elem: '#demo_hash',
+      height: 420,
+      url: '/demo/table/user', //数据接口
+      page: true, //开启分页
+      cols: [
+        [ //表头
+          {
+            field: 'id',
+            title: 'ID',
+            width: 50,
+            fixed: 'left'
+          }, {
+            field: 'username',
+            title: '用户名',
+            width: 80
+          }, {
+            field: 'sex',
+            title: '性别',
+            width: 80,
+            sort: true
+          }, {
+            field: 'city',
+            title: '城市',
+            width: 80
+          }, {
+            field: 'sign',
+            title: '签名',
+            width: 177
+          }, {
+            field: 'experience',
+            title: '积分',
+            width: 80,
+            sort: true
+          }, {
+            field: 'score',
+            title: '评分',
+            width: 80,
+            sort: true
+          }, {
+            field: 'classify',
+            title: '职业',
+            width: 80
+          }, {
+            field: 'wealth',
+            title: '财富',
+            width: 135,
+            sort: true
+          }
+        ]
+      ]
+    });
+  });
+</script>
+<style scoped>
+</style>
