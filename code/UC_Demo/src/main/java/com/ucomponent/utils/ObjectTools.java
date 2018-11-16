@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * 2018年6月20日
  * 代码老哥
- * NAME:
+ * NAME:对象工具类
  * Descp:
 **/
 public class ObjectTools {

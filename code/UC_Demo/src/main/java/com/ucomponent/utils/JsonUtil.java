@@ -8,7 +8,12 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
+/**
+ * 2018年9月30日
+ * 代码老哥
+ * NAME:Json操作类
+ * Descp:
+**/
 public class JsonUtil {
   public static String object2Json(Object obj) {
     StringBuilder json = new StringBuilder();

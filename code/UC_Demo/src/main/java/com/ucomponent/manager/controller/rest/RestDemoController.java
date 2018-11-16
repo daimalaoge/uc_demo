@@ -25,10 +25,11 @@ import com.ucomponent.po.Demo;
 import com.ucomponent.repository.DemoRepository;
 import com.ucomponent.utils.StringTools;
 /**
- * 
- * @author 代码老哥
- *
- */
+ * 2018年9月30日
+ * 代码老哥
+ * NAME:示例类增删改
+ * Descp:
+**/
 @RestController
 @RequestMapping("/demo")
 public class RestDemoController extends BaseRestController implements ICommons{

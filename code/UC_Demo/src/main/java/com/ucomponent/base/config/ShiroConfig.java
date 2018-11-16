@@ -15,7 +15,12 @@ import com.ucomponent.base.config.manager.UcSessionManager;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-
+/**
+ * 2018年9月30日
+ * 代码老哥
+ * NAME:权限控制器
+ * Descp:
+**/
 //@Configuration
 public class ShiroConfig {
   @Value("${spring.redis.shiro.host}")

@@ -8,10 +8,11 @@ import org.springframework.stereotype.Repository;
 
 import com.ucomponent.po.UcmCodeset;
 /**
- * 
- * @author 代码老哥
- *
- */
+ * 2018年9月30日
+ * 代码老哥
+ * NAME:系统数据字典数据库操作
+ * Descp:
+**/
 @Repository
 public abstract interface UcmCodesetRepository  extends JpaRepository<UcmCodeset, Integer>{
   

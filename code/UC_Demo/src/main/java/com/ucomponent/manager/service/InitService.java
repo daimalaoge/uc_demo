@@ -8,7 +8,12 @@ import com.ucomponent.base.entity.CodeSetList;
 import com.ucomponent.po.UcmCodeset;
 import com.ucomponent.repository.UcmCodesetRepository;
 
-
+/**
+ * 2018年9月30日
+ * 代码老哥
+ * NAME:系统初始化
+ * Descp:
+**/
 @Service
 public class InitService {
   @Autowired

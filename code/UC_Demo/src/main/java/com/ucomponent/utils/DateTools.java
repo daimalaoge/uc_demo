@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * 2018年6月20日
  * 代码老哥
- * NAME:
+ * NAME:日期操作函数
  * Descp:
 **/
 public class DateTools {

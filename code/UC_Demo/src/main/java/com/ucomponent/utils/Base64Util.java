@@ -4,7 +4,12 @@ import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
 import java.io.UnsupportedEncodingException;
-
+/**
+ * 2018年9月30日
+ * 代码老哥
+ * NAME:Base64字符操作
+ * Descp:
+**/
 public class Base64Util {
 
 	@SuppressWarnings("restriction")

@@ -14,10 +14,11 @@ import javax.persistence.Table;
 
 import lombok.Data;
 /**
- * 
- * @author 代码老哥
- *
- */
+ * 2018年9月30日
+ * 代码老哥
+ * NAME:系统级数据字典
+ * Descp:
+**/
 @Entity
 @Data
 @Table(name = "ucm_codeset") 
