@@ -9,7 +9,7 @@ import com.ucomponent.base.ICommons;
 /**
  * 2018年6月20日
  * 代码老哥
- * NAME:
+ * NAME:加解密类
  * Descp:
 **/
 

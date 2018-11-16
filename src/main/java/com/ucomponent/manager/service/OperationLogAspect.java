@@ -1,9 +1,7 @@
 package com.ucomponent.manager.service;
 
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 
@@ -12,8 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -29,7 +25,12 @@ import com.ucomponent.base.annotation.ActionName;
 import com.ucomponent.po.UcmOperationLog;
 import com.ucomponent.repository.UcmOperationLogRepository;
 import com.ucomponent.utils.JsonUtil;
-
+/**
+ * 2018年9月30日
+ * 代码老哥
+ * NAME:系统日志记录
+ * Descp:
+**/
 @Aspect
 @Component
 public class OperationLogAspect {

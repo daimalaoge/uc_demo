@@ -12,7 +12,12 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.support.spring.FastJsonJsonView;
-
+/**
+ * 2018年9月30日
+ * 代码老哥
+ * NAME:Shrio异常捕捉器
+ * Descp:
+**/
 public class ShrioExceptionHandler implements HandlerExceptionResolver {
 
   public ModelAndView resolveException(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o,

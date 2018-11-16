@@ -5,10 +5,11 @@ import java.util.List;
 import org.springframework.context.annotation.Scope;
 import com.ucomponent.po.UcmCodeset;
 /**
- * 
- * @author 代码老哥
- * CodeSet方法
- */
+ * 2018年9月30日
+ * 代码老哥
+ * NAME:系统字典单例模式
+ * Descp:
+**/
 @Scope("prototype")
 public class CodeSetList {
   private static final CodeSetList instance = new CodeSetList();

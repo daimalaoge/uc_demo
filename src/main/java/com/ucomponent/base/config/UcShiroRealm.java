@@ -8,7 +8,12 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
  
 import javax.annotation.Resource;
-
+/**
+ * 2018年9月30日
+ * 代码老哥
+ * NAME:Shiro授权
+ * Descp:
+**/
 public class UcShiroRealm extends AuthorizingRealm {
 
   @Override

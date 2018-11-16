@@ -5,33 +5,49 @@ import org.apache.commons.lang3.StringEscapeUtils;
 /**
  * 2018年6月20日
  * 代码老哥
- * NAME:
+ * NAME:字符工具类
  * Descp:
 **/
 public class StringTools {
+	/**
+	 * 去掉null
+	 * @param input
+	 * @return
+	 */
 	public static String getString(String input) {
 		if (null == input) {
 			return "";
 		}
 		return input;
 	}
-	
+	/**
+	 * 如果为null则返回def
+	 * @param input
+	 * @param def
+	 * @return
+	 */
 	public static String getString(String input,String def) {
 		if (null == input) {
 			return def;
 		}
 		return input;
 	}
+	/**
+	 * 去除null和空格
+	 * @param input
+	 * @return
+	 */
 	public static String getIntString(String input) {
 		if (null == input) {
 			return "";
 		}
 		return input.replaceAll(",","").trim();
 	}
-
-
-
-	
+	/**
+	 * 过滤html字符
+	 * @param input
+	 * @return
+	 */
 	public static String getHtmlString(String input) {
 		if (null == input) {
 			return "";

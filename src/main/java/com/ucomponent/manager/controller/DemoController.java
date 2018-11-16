@@ -23,7 +23,7 @@ import com.ucomponent.utils.StringTools;
  * 2018年10月27日
  * DemoController.java
  * 代码老哥
- * NAME:
+ * NAME:示例类页面跳转
  * Descp:
 **/
 @Controller

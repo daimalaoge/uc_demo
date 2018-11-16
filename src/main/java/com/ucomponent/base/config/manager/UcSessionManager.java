@@ -7,7 +7,12 @@ import org.springframework.util.StringUtils;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import java.io.Serializable;
-
+/**
+ * 2018年9月30日
+ * 代码老哥
+ * NAME:Session控制器
+ * Descp:
+**/
 public class UcSessionManager extends DefaultWebSessionManager {
   private static final String AUTHORIZATION = "Authorization";
   private static final String REFERENCED_SESSION_ID_SOURCE = "Stateless request";

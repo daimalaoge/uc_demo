@@ -5,7 +5,7 @@ import java.security.MessageDigest;
 /**
  * 2018年6月20日
  * 代码老哥
- * NAME:
+ * NAME:MD5加密类
  * Descp:
 **/
 public class MD5Util {

@@ -13,7 +13,7 @@ import com.ucomponent.po.Demo;
  * 2018年10月22日
  * DemoRepository.java
  * 代码老哥
- * NAME:
+ * NAME:示例类数据库操作
  * Descp:
 **/
 @Repository

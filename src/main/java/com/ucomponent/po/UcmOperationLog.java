@@ -12,10 +12,11 @@ import javax.persistence.Table;
 
 import lombok.Data;
 /**
- * 
- * @author 代码老哥
- *
- */
+ * 2018年9月30日
+ * 代码老哥
+ * NAME:操作日志
+ * Descp:
+**/
 @Entity
 @Data
 @Table(name = "ucm_operation_log") 

@@ -17,7 +17,7 @@ import lombok.Data;
  * 2018年10月22日
  * Demo.java
  * 代码老哥
- * NAME:
+ * NAME:示例类
  * Descp:
 **/
 @Entity

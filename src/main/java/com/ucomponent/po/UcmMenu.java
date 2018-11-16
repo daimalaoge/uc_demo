@@ -14,7 +14,7 @@ import lombok.Data;
 /**
  * 2018年10月20日
  * 代码老哥
- * NAME:
+ * NAME:系统菜单
  * Descp:
 **/
 @Entity
