@@ -22,8 +22,8 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.ucomponent.base.annotation.ActionName;
-import com.ucomponent.po.UcmOperationLog;
-import com.ucomponent.repository.UcmOperationLogRepository;
+import com.ucomponent.po.SysOperationLog;
+import com.ucomponent.repository.SysOperationLogRepository;
 import com.ucomponent.utils.JsonUtil;
 /**
  * 2018年9月30日
@@ -37,7 +37,7 @@ public class OperationLogAspect {
   //定义切点 @Pointcut
   private HttpServletRequest request = null;
   @Autowired
-  private UcmOperationLogRepository ucmOperationLogRepository;
+  private SysOperationLogRepository ucmOperationLogRepository;
   private static final ThreadLocal<Date> beginTimeThreadLocal = new NamedThreadLocal<Date>("ThreadLocal beginTime");
   private String title = "";
   private String exception = "";
@@ -97,7 +97,7 @@ public class OperationLogAspect {
     long beginTime = beginTimeThreadLocal.get().getTime();// 得到线程绑定的局部变量（开始时间）
     long endTime = System.currentTimeMillis(); // 2、结束时间  
 
-    UcmOperationLog log = new UcmOperationLog();
+    SysOperationLog log = new SysOperationLog();
     log.setTitle(this.title);
     
     if(this.exception.equals("")){
@@ -105,7 +105,7 @@ public class OperationLogAspect {
     }else{
     	log.setCodesetOplogtype("OPLOG_ERROR");
     }
-    log.setRemoteAddr(request.getRemoteAddr());
+    log.setRemoteAddr(getRemortIP(request));
     log.setRequestUri(request.getRequestURI());
     log.setMethod(request.getMethod());
     log.setClassFunc(methodName);
@@ -123,5 +123,12 @@ public class OperationLogAspect {
     ServletRequestAttributes sra = (ServletRequestAttributes)ra;  
     HttpServletRequest request = sra.getRequest();
     return request;
+  }
+  
+  public String getRemortIP(HttpServletRequest request) {  
+    if (request.getHeader("x-forwarded-for") == null) {
+      return request.getRemoteAddr();
+    }
+    return request.getHeader("x-forwarded-for");
   }
 }

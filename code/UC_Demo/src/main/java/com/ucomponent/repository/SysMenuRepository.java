@@ -3,7 +3,7 @@ package com.ucomponent.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.ucomponent.po.UcmMenu;
+import com.ucomponent.po.SysMenu;
 /**
  * 2018年9月30日
  * 代码老哥
@@ -11,6 +11,6 @@ import com.ucomponent.po.UcmMenu;
  * Descp:
 **/
 @Repository
-public abstract interface UcmMenuRepository extends JpaRepository<UcmMenu, Integer>{
+public abstract interface SysMenuRepository extends JpaRepository<SysMenu, Integer>{
 
 }

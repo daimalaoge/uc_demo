@@ -21,8 +21,8 @@ import lombok.Data;
 **/
 @Entity
 @Data
-@Table(name = "ucm_codeset") 
-public class UcmCodeset implements Serializable{
+@Table(name = "ucm_sys_codeset") 
+public class SysCodeset implements Serializable{
   private static final long serialVersionUID = 1L;
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

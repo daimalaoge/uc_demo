@@ -3,7 +3,7 @@ package com.ucomponent.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.ucomponent.po.UcmOperationLog;
+import com.ucomponent.po.SysOperationLog;
 /**
  * 2018年9月30日
  * 代码老哥
@@ -11,6 +11,6 @@ import com.ucomponent.po.UcmOperationLog;
  * Descp:
 **/
 @Repository
-public abstract interface UcmOperationLogRepository extends JpaRepository<UcmOperationLog, Integer>{
+public abstract interface SysOperationLogRepository extends JpaRepository<SysOperationLog, Integer>{
 
 }
