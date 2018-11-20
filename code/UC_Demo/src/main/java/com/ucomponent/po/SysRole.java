@@ -13,33 +13,26 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
-
 /**
- * 2018年11月20日
+ * 2018年9月30日
  * 代码老哥
- * NAME:用户登录账户
+ * NAME:系统角色
  * Descp:
 **/
 @Entity
 @Data
-@Table(name = "ucm_user_account") 
-public class UserAccount implements Serializable{
+@Table(name = "ucm_sys_role") 
+public class SysRole implements Serializable{
   private static final long serialVersionUID = 1L;
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
   @Column
-  private String loginName = "";
-  @Column
-  private String loginEmail = "";
-  @Column
-  private String loginPhone = "";
-  @Column
-  private String loginOtherid = "";
-  @Column
-  private String password = "";
+  private String name = "";
   @Column
   private String codesetGstatus = "G_STATUS_USE";
+  @Column
+  private String remarks = "";
   @ManyToOne
   @JoinColumn(name = "create_user_id")
   private UserAccount createUser;

@@ -60,15 +60,15 @@ public class SysCodeset implements Serializable{
   @Column
   private int seq = 0;// '顺序',
   @Column
-  private int status = 0;//
-//  @ManyToOne
-//  @JoinColumn(name = "create_user_id")
-//  private SysUserAccount createUser;
+  private String codesetGstatus ="G_STATUS_USE";//
+  @ManyToOne
+  @JoinColumn(name = "create_user_id")
+  private UserAccount createUser;
   @Column
   private Date createDate = new Date();
-//  @ManyToOne
-//  @JoinColumn(name = "update_user_id")
-//  private SysUserAccount updateUser;
+  @ManyToOne
+  @JoinColumn(name = "update_user_id")
+  private UserAccount updateUser;
   @Column
   private Date updateDate = new Date();
 }

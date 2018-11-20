@@ -16,9 +16,9 @@ import com.ucomponent.po.SysCodeset;
 @Repository
 public abstract interface SysCodesetRepository  extends JpaRepository<SysCodeset, Integer>{
   
-  public abstract List<SysCodeset> findByStatusOrderBySeq(int use);
+  public abstract List<SysCodeset> findByCodesetGstatusOrderBySeq(String use);
   
-  public abstract List<SysCodeset> findByStatusOrStatusOrderBySeq(int use,int nouse);
+  public abstract List<SysCodeset> findByCodesetGstatusOrCodesetGstatusOrderBySeq(String use,String nouse);
   
-  public abstract List<SysCodeset> findByPCodeAndStatusOrderBySeq(String pcode,int status);
+  public abstract List<SysCodeset> findByPCodeAndCodesetGstatusOrderBySeq(String pcode,String status);
 }
