@@ -19,8 +19,8 @@ import lombok.Data;
 **/
 @Entity
 @Data
-@Table(name = "ucm_operation_log") 
-public class UcmOperationLog implements Serializable {
+@Table(name = "ucm_sys_operation_log") 
+public class SysOperationLog implements Serializable {
   private static final long serialVersionUID = 1L;
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

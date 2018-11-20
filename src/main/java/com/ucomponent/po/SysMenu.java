@@ -19,8 +19,8 @@ import lombok.Data;
 **/
 @Entity
 @Data
-@Table(name = "ucm_menu") 
-public class UcmMenu implements Serializable {
+@Table(name = "ucm_sys_menu") 
+public class SysMenu implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,15 +34,13 @@ public class UcmMenu implements Serializable {
 	@Column
 	private String level = "";
 	@Column
-	private String pType = "";
-	@Column
 	private String icon = "";
 	@Column
 	private int seq = 0;
 	@Column
-	private String status = "0";
+	private String codesetGstatus = "";
 	@Column
-	private String type = "";
+	private String codesetMenutype = "";
 	@Column
 	private String remarks = "";
 

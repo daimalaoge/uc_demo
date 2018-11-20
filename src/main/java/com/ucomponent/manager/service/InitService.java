@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ucomponent.base.entity.CodeSetList;
-import com.ucomponent.po.UcmCodeset;
-import com.ucomponent.repository.UcmCodesetRepository;
+import com.ucomponent.po.SysCodeset;
+import com.ucomponent.repository.SysCodesetRepository;
 
 /**
  * 2018年9月30日
@@ -17,14 +17,14 @@ import com.ucomponent.repository.UcmCodesetRepository;
 @Service
 public class InitService {
   @Autowired
-  private UcmCodesetRepository ucmCodesetRepository;
+  private SysCodesetRepository ucmCodesetRepository;
   
   public void sysInit(){
     System.out.println("+++++++ SYS INIT +++++++");
     
     System.out.println("STEP 1. CodeSet init");
     CodeSetList scmap = CodeSetList.getInstance();
-    List<UcmCodeset> list = ucmCodesetRepository.findByStatusOrderBySeq(0);
+    List<SysCodeset> list = ucmCodesetRepository.findByStatusOrderBySeq(0);
     scmap.setList(list);
   }
 }

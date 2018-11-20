@@ -15,7 +15,7 @@ import com.ucomponent.base.annotation.ActionName;
 import com.ucomponent.base.controller.BaseController;
 import com.ucomponent.base.entity.CodeSetList;
 import com.ucomponent.po.Demo;
-import com.ucomponent.po.UcmCodeset;
+import com.ucomponent.po.SysCodeset;
 import com.ucomponent.repository.DemoRepository;
 import com.ucomponent.utils.StringTools;
 
@@ -43,7 +43,7 @@ public class DemoController extends BaseController implements ICommons{
   public String boaction(Model model,HttpServletRequest request,@PathVariable String mode){
   	//设置列表项目数据
   	CodeSetList cslist = CodeSetList.getInstance();
-  	List<UcmCodeset> sexlist = cslist.getList("SEX");
+  	List<SysCodeset> sexlist = cslist.getList("SEX");
   	model.addAttribute("SEXLIST",sexlist);
   	//保存或升级操作
 		if(mode.equals(UCMANAGER_ACTION_ADD)){
