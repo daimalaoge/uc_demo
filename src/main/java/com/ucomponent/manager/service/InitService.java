@@ -24,7 +24,7 @@ public class InitService {
     
     System.out.println("STEP 1. CodeSet init");
     CodeSetList scmap = CodeSetList.getInstance();
-    List<SysCodeset> list = ucmCodesetRepository.findByStatusOrderBySeq(0);
+    List<SysCodeset> list = ucmCodesetRepository.findByCodesetGstatusOrderBySeq("G_STATUS_USE");
     scmap.setList(list);
   }
 }
