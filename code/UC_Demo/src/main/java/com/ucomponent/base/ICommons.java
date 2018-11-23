@@ -20,14 +20,12 @@ public abstract interface ICommons{
 	
 	//ACCOUNT对象在session中命名
 	public static final String SESSION_ACCOUNT = "SESSION_ACCOUNT";
-	//客户端本地是否可以自动登录
-	public static final String COOKIE_LOCAL_LOGIN = "COOKIE_LOCAL_LOGIN";	
+	//ACCOUNT对象在session中命名
+  public static final String SESSION_MENULIST = "SESSION_MENULIST";
 	//ACCOUNT对象可通过的路径
 	public static final String SESSION_BIZPATH = "SESSION_BIZPATH";
 	//验证码
 	public static final String SESSION_IDECODE_IMG = "SESSION_IDECODE_IMG";
-	//用户登录
-	public static final String SESSION_PERSON = "SESSION_PERSON";
 
 	//UC后台列表页显示条数
 	public static final int UCMANAGER_DISP_SIZE = 20;

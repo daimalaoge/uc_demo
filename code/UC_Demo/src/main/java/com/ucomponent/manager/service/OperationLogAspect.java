@@ -21,6 +21,7 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.ucomponent.base.ICommons;
 import com.ucomponent.base.annotation.ActionName;
 import com.ucomponent.po.SysOperationLog;
 import com.ucomponent.repository.SysOperationLogRepository;
@@ -33,7 +34,7 @@ import com.ucomponent.utils.JsonUtil;
 **/
 @Aspect
 @Component
-public class OperationLogAspect {
+public class OperationLogAspect implements ICommons{
   //定义切点 @Pointcut
   private HttpServletRequest request = null;
   @Autowired
@@ -42,6 +43,7 @@ public class OperationLogAspect {
   private String title = "";
   private String exception = "";
   private String result = "";
+  private int userid = 0;
   
   //@Before:  前置通知
   @Before("execution (* com.ucomponent..controller..*.*(..))")
@@ -111,7 +113,7 @@ public class OperationLogAspect {
     log.setClassFunc(methodName);
     log.setParams(JsonUtil.object2Json(params));
     log.setException(exception);
-    log.setUserId(0);
+    log.setUserId(userid);
     log.setResult(this.result);
     log.setCreateDatetime(beginTimeThreadLocal.get());
     log.setRuntime(endTime - beginTime);

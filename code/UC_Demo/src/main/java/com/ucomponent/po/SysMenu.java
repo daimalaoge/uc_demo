@@ -32,6 +32,8 @@ public class SysMenu implements Serializable {
 	@Column
 	private String url = "";
 	@Column
+  private String urlData = "";
+	@Column
 	private String level = "";
 	@Column
 	private String icon = "";
