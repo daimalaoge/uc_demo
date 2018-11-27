@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.ucomponent.base.controller.BasePO;
+
 import lombok.Data;
 
 /**
@@ -23,7 +25,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "ucm_demo") 
-public class Demo implements Serializable{
+public class Demo extends BasePO implements Serializable{
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
@@ -45,14 +47,5 @@ public class Demo implements Serializable{
   private double deposit = 0.0; //'存款',
   @Column
   private String codesetSex = "";
-  @Column
-  private String codesetGstatus = "G_STATUS_USE";// '0 正常 1 无效 2 删除',
-  @Column
-  private Date createDatetime = new Date();
-  @Column
-  private Date updateDatetime = new Date();
-  @Column
-  private int createUserId = 0;
-  @Column
-  private int updateUserId = 0;
+
 }

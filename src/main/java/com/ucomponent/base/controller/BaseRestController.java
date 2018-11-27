@@ -8,6 +8,7 @@ import java.io.ObjectOutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -115,4 +116,38 @@ public class BaseRestController implements ICommons{
     List<T> dest = (List<T>) in.readObject();  
     return dest;  
 	}
+	/**
+	 * 保存
+	 * @param vo
+	 * @param request
+	 */
+	public void doSave(BasePO vo,HttpServletRequest request){
+	  String actionModel = StringTools.getString(request.getParameter("ACTIONMODE"));
+    if(actionModel.equals("ADD")){
+      vo.setCreateDatetime(new Date());
+      vo.setUpdateDatetime(new Date());   
+    }else if(actionModel.equals("EDIT")){
+      vo.setUpdateDatetime(new Date());   
+    }
+	}
+	/**
+	 * 删除
+	 * @param vo
+	 * @param request
+	 */
+	public void doDelete(BasePO vo){
+	  vo.setCodesetGstatus("G_STATUS_DEL");
+	  vo.setUpdateDatetime(new Date());
+  }
+	/**
+	 * 更改状态
+	 * @param vo
+	 */
+	public void doStatus(BasePO vo){
+	  if(vo.getCodesetGstatus().equals("G_STATUS_USE")){
+	    vo.setCodesetGstatus("G_STATUS_NOUSE");
+    }else if(vo.getCodesetGstatus().equals("G_STATUS_NOUSE")){
+      vo.setCodesetGstatus("G_STATUS_USE");
+    }
+  }
 }

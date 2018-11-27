@@ -59,15 +59,7 @@ public class RestDemoController extends BaseRestController implements ICommons{
   @ActionName(value = "Demo save")
   @RequestMapping("/bo/save")
   public String bosave(HttpServletRequest request,Demo vo){
-  	String actionModel = StringTools.getString(request.getParameter("ACTIONMODE"));
-		if(actionModel.equals("ADD")){
-      vo.setCreateDatetime(new Date());
-      vo.setUpdateDatetime(new Date());		
-    }else if(actionModel.equals("EDIT")){
-      vo.setUpdateDatetime(new Date());   
-		}else {
-		  
-		}
+  	super.doSave(vo, request);
 		demoRepository.save(vo);
   	return UCMANAGER_DATA_SUCCUSS;
   }
@@ -76,9 +68,8 @@ public class RestDemoController extends BaseRestController implements ICommons{
   @RequestMapping("/bo/del")
   public String bodel(HttpServletRequest request){
   	String id = StringTools.getString(request.getParameter("id"));
-		Demo demo = demoRepository.getOne(Integer.parseInt(id));
-		demo.setCodesetGstatus("G_STATUS_DEL");
-		demo.setUpdateDatetime(new Date());
+		Demo demo = demoRepository.getOne(Integer.parseInt(id));	
+		super.doDelete(demo);
 		demoRepository.save(demo);
   	return UCMANAGER_DATA_SUCCUSS;
   }
@@ -88,11 +79,7 @@ public class RestDemoController extends BaseRestController implements ICommons{
   public String bostatus(HttpServletRequest request){
   	String id = StringTools.getString(request.getParameter("id"));
 		Demo demo = demoRepository.getOne(Integer.parseInt(id));
-		if(demo.getCodesetGstatus().equals("G_STATUS_USE")){
-			demo.setCodesetGstatus("G_STATUS_NOUSE");
-		}else if(demo.getCodesetGstatus().equals("G_STATUS_NOUSE")){
-			demo.setCodesetGstatus("G_STATUS_USE");
-		}
+		super.doStatus(demo);
 		demoRepository.save(demo);
   	return UCMANAGER_DATA_SUCCUSS;
   }
