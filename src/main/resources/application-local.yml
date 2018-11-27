@@ -22,4 +22,4 @@ spring:
  
 logging:
   level:
-    cn.daimalaoge : debug
+    com.ucomponent : debug
