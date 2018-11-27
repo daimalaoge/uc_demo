@@ -32,7 +32,7 @@ public class IndexController implements ICommons{
   private SysMenuRepository sysMenuRepository;
   
   @RequestMapping("/index")
-  private String index(Model model,HttpServletRequest request,HttpServletResponse response){
+  public String index(Model model,HttpServletRequest request,HttpServletResponse response){
     HttpSession session = request.getSession();
     //用户名密码校验，这部分代码放在login中进行
     String loginid = "admin";
@@ -55,13 +55,13 @@ public class IndexController implements ICommons{
   }
   
   @RequestMapping("/setting")
-  private String setting(Model model,HttpServletRequest request,HttpServletResponse response){
+  public String setting(Model model,HttpServletRequest request,HttpServletResponse response){
     
     return "setting";
   }
   
   @RequestMapping("/main")
-  private String mainpage(Model model,HttpServletRequest request,HttpServletResponse response){
+  public String mainpage(Model model,HttpServletRequest request,HttpServletResponse response){
     
     return "main";
   }

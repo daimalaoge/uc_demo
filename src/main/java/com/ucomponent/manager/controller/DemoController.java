@@ -57,6 +57,5 @@ public class DemoController extends BaseController implements ICommons{
 			model.addAttribute("vo",demoRepository.getOne(Integer.parseInt(id)));
 		}
     return "demo/edit";
-  }
-	
+  }	
 }

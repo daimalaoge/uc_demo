@@ -2,9 +2,11 @@ package com.ucomponent.base.controller;
 
 import java.util.Date;
 import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 
 import lombok.Data;
 
+@MappedSuperclass
 @Data
 public class BasePO {
   @Column

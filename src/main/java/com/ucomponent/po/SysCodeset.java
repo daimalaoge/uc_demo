@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.ucomponent.base.controller.BasePO;
+
 import lombok.Data;
 /**
  * 2018年9月30日
@@ -22,7 +24,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "ucm_sys_codeset") 
-public class SysCodeset implements Serializable{
+public class SysCodeset extends BasePO implements Serializable{
   private static final long serialVersionUID = 1L;
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,16 +61,5 @@ public class SysCodeset implements Serializable{
   private String attrValue10 = "";// '',
   @Column
   private int seq = 0;// '顺序',
-  @Column
-  private String codesetGstatus ="G_STATUS_USE";//
-  @ManyToOne
-  @JoinColumn(name = "create_user_id")
-  private UserAccount createUser;
-  @Column
-  private Date createDate = new Date();
-  @ManyToOne
-  @JoinColumn(name = "update_user_id")
-  private UserAccount updateUser;
-  @Column
-  private Date updateDate = new Date();
+
 }
