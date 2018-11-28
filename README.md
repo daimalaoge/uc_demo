@@ -1,11 +1,4 @@
 # uc_demo
-The demo of Union Component Demo project
-</p>
-大家好，我是代码老哥
-</p>
-欢迎大家关注“Union Component”项目
-</p>
-</p>
 uc_demo
 </p>
 uc_demo项目是“Union Component联合组件”项目最简单的一个用例，这个用例给大家一个参考，就是如何用框架实现最简单的增删改功能
