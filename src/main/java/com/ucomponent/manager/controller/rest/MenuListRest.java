@@ -29,7 +29,7 @@ public class MenuListRest implements ICommons{
       return null;
     }
     for(SysMenu smenu1:flist){
-      if(smenu1.getLevel().equals("1")){
+      if(smenu1.getLevels() ==1){
         Menu menu0 = new Menu();
         menu0.setTitle(smenu1.getName());
         menu0.setIcon(smenu1.getIcon());
@@ -37,14 +37,14 @@ public class MenuListRest implements ICommons{
         List<Menu> mlist1 = new ArrayList<Menu>();
     
         for(SysMenu smenu2:flist){
-          if(smenu2.getLevel().equals("2") && smenu2.getPId() == smenu1.getId()){
+          if(smenu2.getLevels()==2 && smenu2.getUpperId() == smenu1.getId()){
             Menu menu = new Menu();
             menu.setTitle(smenu2.getName());
             menu.setIcon(smenu2.getIcon());
             menu.setSpread("true");
             List<Menu> mlist2 = new ArrayList<Menu>();
             for(SysMenu smenu3:flist){
-              if(smenu3.getLevel().equals("3") && smenu3.getPId()==smenu2.getId()){
+              if(smenu3.getLevels()==3 && smenu3.getUpperId()==smenu2.getId()){
                 Menu menu2 = new Menu();
                 menu2.setTitle(smenu3.getName());
                 menu2.setIcon(smenu3.getIcon());

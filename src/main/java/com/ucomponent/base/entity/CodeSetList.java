@@ -35,7 +35,7 @@ public class CodeSetList {
   public List<SysCodeset> getList(String pCodekey){
     List<SysCodeset> rlist = new ArrayList<SysCodeset>();
     for(SysCodeset uc:list){
-      if(uc.getPCode().equals(pCodekey)){
+      if(uc.getUpperCode().equals(pCodekey)){
         rlist.add(uc);
       }
     }

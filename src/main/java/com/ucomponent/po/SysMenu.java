@@ -26,7 +26,7 @@ public class SysMenu implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column
-	private int pId = 0;
+	private int upperId = 0;
 	@Column
 	private String name = "";
 	@Column
@@ -34,7 +34,7 @@ public class SysMenu implements Serializable {
 	@Column
   private String urlData = "";
 	@Column
-	private String level = "";
+	private int levels = 0;
 	@Column
 	private String icon = "";
 	@Column

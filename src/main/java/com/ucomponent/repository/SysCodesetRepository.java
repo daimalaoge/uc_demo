@@ -20,5 +20,5 @@ public abstract interface SysCodesetRepository  extends JpaRepository<SysCodeset
   
   public abstract List<SysCodeset> findByCodesetGstatusOrCodesetGstatusOrderBySeq(String use,String nouse);
   
-  public abstract List<SysCodeset> findByPCodeAndCodesetGstatusOrderBySeq(String pcode,String status);
+  public abstract List<SysCodeset> findByUpperCodeAndCodesetGstatusOrderBySeq(String pcode,String status);
 }

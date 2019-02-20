@@ -38,7 +38,7 @@ public class SysCodeset extends BasePO implements Serializable{
   @Column
   private String descp = "";// '说明',
   @Column
-  private String pCode = "";// '上级编码',
+  private String upperCode = "";// '上级编码',
   @Column(name="attr_value1")
   private String attrValue1 = "";// '',
   @Column(name="attr_value2")

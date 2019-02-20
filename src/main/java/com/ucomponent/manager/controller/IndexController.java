@@ -48,9 +48,12 @@ public class IndexController implements ICommons{
         List<SysMenu> mlist = sysMenuRepository.getByUserId(user.getId());
         session.setAttribute(SESSION_MENULIST, mlist);
         model.addAttribute("user",user);
+        System.out.println("mlist----------------"+mlist.size());
+        model.addAttribute("menulist",mlist);
         return "index";
       }
     }
+    
     return "index";
   }
   
