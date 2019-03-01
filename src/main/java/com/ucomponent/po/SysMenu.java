@@ -1,6 +1,7 @@
 package com.ucomponent.po;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.ucomponent.base.controller.BasePO;
 
 import lombok.Data;
 
@@ -20,7 +23,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "ucm_sys_menu") 
-public class SysMenu implements Serializable {
+public class SysMenu extends BasePO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,10 +43,7 @@ public class SysMenu implements Serializable {
 	@Column
 	private int seq = 0;
 	@Column
-	private String codesetGstatus = "";
-	@Column
 	private String codesetMenutype = "";
 	@Column
 	private String remarks = "";
-
 }

@@ -1,5 +1,7 @@
 package com.ucomponent.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.ucomponent.po.SysRole;
@@ -11,5 +13,5 @@ import com.ucomponent.po.SysRole;
  * Descp:
 **/
 public abstract interface SysRoleRepository extends JpaRepository<SysRole, Integer>{
-
+	public abstract Page<SysRole> findByNameContainingAndCodesetGstatusIn(String name,String status,Pageable pageable);
 }

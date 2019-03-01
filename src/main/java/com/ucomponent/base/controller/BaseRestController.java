@@ -116,6 +116,14 @@ public class BaseRestController implements ICommons{
     List<T> dest = (List<T>) in.readObject();  
     return dest;  
 	}
+	
+//	private static <T> List<T> deepCopy(List<T> src) throws IOException, ClassNotFoundException {
+//		List<T> dest = new ArrayList();
+//    for(T obj:src) {
+//    	dest.add(obj);
+//    }
+//    return dest;  
+//	}
 	/**
 	 * 保存
 	 * @param vo

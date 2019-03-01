@@ -31,6 +31,8 @@ public abstract interface ICommons{
 	public static final int UCMANAGER_DISP_SIZE = 20;
 	//UC后台返回成功：1
 	public static final String UCMANAGER_DATA_SUCCUSS = "1";
+	//UC后台返回失败：2
+	public static final String UCMANAGER_DATA_ERROR = "-99";
 	//UC后台列表页正常显示
 	public static final String UCMANAGER_LISTPAGE_CODE = "0";
 	//UC后台数据增加

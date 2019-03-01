@@ -25,7 +25,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "ucm_user_account") 
-public class UserAccount extends BasePO implements Serializable{
+public class UserAccount  extends BasePO implements Serializable{
   private static final long serialVersionUID = 1L;
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

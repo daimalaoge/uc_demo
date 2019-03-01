@@ -46,7 +46,7 @@ public class SysOperationLog implements Serializable {
   @Column
   private String result = "";// 运行结果,
   @Column
-  private int userId = 0;//
+  private String userId = "";//
   @Column
   private Date createDatetime;// '创建日期',
 

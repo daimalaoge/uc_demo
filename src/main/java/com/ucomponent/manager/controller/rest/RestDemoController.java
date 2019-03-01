@@ -1,14 +1,7 @@
 package com.ucomponent.manager.controller.rest;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

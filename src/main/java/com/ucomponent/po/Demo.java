@@ -47,5 +47,4 @@ public class Demo extends BasePO implements Serializable{
   private double deposit = 0.0; //'存款',
   @Column
   private String codesetSex = "";
-
 }

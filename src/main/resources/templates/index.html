@@ -84,58 +84,62 @@
 			</div>
 		</div>
 		<!-- silds -->
+		<!--侧边导航栏-->
 		<div class="layui-side" kit-side="true">
 			<div class="layui-side-scroll">
 				<div id="menu-box">
 					<ul class="kit-menu">
-						<li class="kit-menu-item layui-this">
-							<a href="#/">
-								<i class="layui-icon"></i>
-								<span>控制面板</span>
-							</a>
-						</li>
-						<!-- 菜单描绘 -->
-				
-						<li class="kit-menu-item">
-							<a href="javascript:;" class="child">
-								<i class="layui-icon"></i>
-								<span>菜单演示</span>
-							</a>
-							<ul class="kit-menu-child kit-menu-child layui-anim layui-anim-upbit">
-								<li class="kit-menu-item" >
-									<a href="javascript:;" class="child">
-										<i class="layui-icon"></i>
-										<span>二级菜单1</span>
-									</a>
-									<ul class="kit-menu-child kit-menu-child layui-anim layui-anim-upbit">
-										<li class="kit-menu-item">
-											<a href="#/demo/list" data="/demo/list" name="路由DEMO" >
-												<i class="layui-icon"></i>
-												<span>路由DEMO</span>
-											</a>
-										</li>
-										<li style="display:none!important;">
-											<a href="#/demo/boaction/ADD" class=" hide" data="/demo/boaction/ADD" name="新增DEMO" ></a>
-											<a href="#/demo/boaction/EDIT" data="/demo/boaction/EDIT" name="编辑DEMO" ></a>
-										</li>
-										<li class="kit-menu-item">
-											<a href="#/member/all">
-												<i class="layui-icon"></i>
-												<span>所有会员</span>
-											</a>
-										</li>
-										<li class="kit-menu-item">
-											<a href="#/user/table2">
-												<i class="layui-icon"></i>
-												<span>会员组</span>
-											</a>
-										</li>
-									</ul>
-								</li>
-
-							</ul>
-						</li>
-						
+					<!-- M1 -->
+					<#list menulist as mlist1>
+						<#if mlist1.levels = 1 && mlist1.codesetMenutype = 'MENU_TYPE_PAGE'>
+							<li class="kit-menu-item">
+								<a href="javascript:;" class="child">
+									<i class="layui-icon"></i>
+									<span>${mlist1.name}</span>
+								</a>
+								<ul class="kit-menu-child kit-menu-child layui-anim layui-anim-upbit">
+									<!-- M2 -->
+									<#list menulist as mlist2>
+										<#if mlist2.upperId = mlist1.id && mlist2.codesetMenutype = 'MENU_TYPE_PAGE'>
+								
+											<li class="kit-menu-item" >
+												<a href="javascript:;" class="child">
+													<i class="layui-icon"></i>
+													<span>${mlist2.name}</span>
+												</a>
+												
+												<!-- M3 -->
+												<ul class="kit-menu-child kit-menu-child layui-anim layui-anim-upbit">
+													<#list menulist as mlist3>
+														<#if mlist3.upperId = mlist2.id && mlist3.codesetMenutype = 'MENU_TYPE_PAGE'>
+															<li class="kit-menu-item">
+																<a href="${mlist3.url}" data="${mlist3.urlData}" name="${mlist3.name}" >
+																	<i class="layui-icon"></i>
+																	<span>${mlist3.name}</span>
+																</a>
+															</li>
+														</#if>
+													</#list>
+												</ul>		
+												<!-- M3 END -->											
+											</li>
+										</#if>
+									</#list>
+									<!-- M2 END -->
+								</ul>
+							</li>
+						</#if>
+					</#list>
+					<!-- M1 END-->
+					<!-- Hidden -->
+					<li style="display:none!important;"> 
+						<#list menulist as mlist>
+							<#if mlist.codesetMenutype = 'MENU_TYPE_IN'>
+								<a href="${mlist.url}" data="${mlist.urlData}" name="${mlist.name}" class=" hide"></a> 
+							</#if>
+						</#list>
+					</li> 
+					<!-- Hidden END-->
 					</ul>
 				</div>
 			</div>
@@ -146,7 +150,7 @@
 		</div>
 		<!-- footer -->
 		<div class="layui-footer" kit-footer="true">
-			2018 © Union Component  MIT license
+			2019 © Union Component  MIT license
 		</div>
 	</div>
 	<!-- build:js -->

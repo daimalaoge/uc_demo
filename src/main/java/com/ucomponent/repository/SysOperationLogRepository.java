@@ -1,5 +1,9 @@
 package com.ucomponent.repository;
 
+import java.util.Date;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,5 +16,5 @@ import com.ucomponent.po.SysOperationLog;
 **/
 @Repository
 public abstract interface SysOperationLogRepository extends JpaRepository<SysOperationLog, Integer>{
-
+	public abstract Page<SysOperationLog> findByUserIdContainingAndTitleContainingAndCreateDatetimeBetween(String userid,String title,Date datestart,Date dateend,Pageable pageable);
 }

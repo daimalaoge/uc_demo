@@ -61,5 +61,4 @@ public class SysCodeset extends BasePO implements Serializable{
   private String attrValue10 = "";// '',
   @Column
   private int seq = 0;// '顺序',
-
 }
