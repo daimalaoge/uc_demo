@@ -1,0 +1,153 @@
+<!-- 模板 -->
+<div class="layui-fluid">
+  <div class="layui-row">
+    <div class="layui-col-xs12">
+      <div class="layui-card">
+        <div class="layui-card-header">
+          <a href="#/sysd/menu/boaction/ADD?pid=${pid}&plevels=${plevels}" class="layui-btn layui-btn-xs">
+            <i class="layui-icon">&#xe654;</i>
+            <span>新增</span>
+          </a>
+
+        </div>
+        <div class="layui-card-body">
+          <table id="data_hash" lay-filter="list_action"></table>
+          <script type="text/html" id="toolbar_hash">
+              <a class="layui-btn layui-btn-xs" lay-event='status'>设置状态</a>
+              <a href="javascript:;" class="layui-btn layui-btn-xs" lay-event='edit'>编辑</a>
+							<a href="javascript:;" class="layui-btn layui-btn-xs" lay-event='list2'>下级</a>
+              <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event='del'>删除</a>
+            </script>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 脚本 -->
+<script>
+  layui.use(['jquery', 'table', 'sidebar', 'form'], function () {
+    var $ = layui.jquery,
+      layer = layui.layer,
+      table = layui.table,
+      sidebar = layui.sidebar,
+      form = layui.form;
+    var router = layui.router();
+    //第一个实例
+    table.render({
+      method: 'post',
+      // size: 'sm',
+      limit: 20,
+      elem: '#data_hash',
+      height: 'full-235',
+      url: '/sysd/menu/list2/data/?pid=${pid}&plevels=${plevels}', //数据接口
+      page: true, //开启分页
+      cols: [
+        [ //表头
+          {
+            field: 'id',
+            title: 'ID',
+            width: 80,
+            sort: true,
+            fixed: 'left'
+          }, {
+            field: 'name',
+            title: '菜单名',
+            width: 120
+          }, {
+            field: 'url',
+            title: '链接',
+            width: 200,
+            sort: true
+          }, {
+            field: 'levels',
+            title: '级别',
+            width: 100
+          }, {
+            field: 'icon',
+            title: '图标',
+            width: 80
+          }, {
+            field: 'seq',
+            title: '顺序',
+            width: 80,
+            sort: true
+          }, {
+            field: 'codesetMenutype',
+            title: '菜单类型',
+            width: 150,
+            sort: true
+          }, {
+            field: 'remarks',
+            title: '备注',
+            width: 100
+          }, {
+            field: 'codesetGstatus',
+            title: '状态',
+            width: 100,
+            sort: true
+          }, {
+            fixed: 'right',
+            title: '操作',
+            width: 260,
+            align: 'center',
+            toolbar: '#toolbar_hash'
+          }
+        ]
+      ]
+    });
+
+    $('#search_hash').on('click', function () {
+      var that = this;
+      sidebar.render({
+        elem: that,
+        content: $('#search_tpl_hash').html(),
+        title: '搜索',
+        shade: true,
+        width: '500px', //可以设置百分比和px
+        done: function () {
+          form.render();
+          //监听提交
+          form.on('submit(form_hash)', function (data) {
+            // layer.msg(JSON.stringify(data.field));
+            table.reload('data_hash', {
+              where: data.field
+            });
+            return false;
+          });
+        }
+      });
+    });
+    
+     //监听行工具事件
+     //注：tool 是工具条事件名，list_action 是 table 原始容器的属性 lay-filter="对应的值"
+	  table.on('tool(list_action)', function(obj){ 
+	    var data = obj.data //获得当前行数据
+	    ,layEvent = obj.event; //获得 lay-event 对应的值
+	    if(layEvent === 'status'){
+	      layer.confirm('将要设置本数据状态吗？', function(index){   
+	        $.post('/sysd/menu/bo/status', "id="+data.id, function (res) {			      
+			      layer.msg("设置成功",{time:1*1000},function(){	
+			      	location.reload(); // 页面刷新	
+			    	})
+					}, 'json');
+				});
+	    } else if(layEvent === 'del'){
+	      layer.confirm('请确定删除（本操作不可恢复）', function(index){   
+	        $.post('/sysd/menu/bo/del', "id="+data.id, function (res) {			      
+			      layer.msg("删除成功",{time:1*1000},function(){	
+			      	location.reload(); // 页面刷新	
+			    	})
+					}, 'json');
+				});
+	    } else if(layEvent === 'edit'){  	
+	    	$(this).attr("href" ,'#/sysd/menu/boaction/EDIT?id='+data.id);
+	    } else if(layEvent === 'list2'){  	
+	    	$(this).attr("href" ,'#/sysd/menu/list2?pid='+data.id+'&plevels='+data.levels);
+	    }
+	  });
+  });
+</script>
+<!-- 样式 -->
+<style scoped>
+</style>

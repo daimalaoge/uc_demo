@@ -1,0 +1,192 @@
+<!-- 模板 -->
+<div class="layui-fluid">
+  <div class="layui-row">
+    <div class="layui-col-xs12">
+      <div class="layui-card">
+        <div class="layui-card-header">
+          <a href="#/sysd/account/boaction/ADD" class="layui-btn layui-btn-xs">
+            <i class="layui-icon">&#xe654;</i>
+            <span>新增</span>
+          </a>
+          <a href="javascript:;" class="layui-btn layui-btn-xs layui-btn-primary" id="search_hash">
+            <i class="layui-icon">&#xe615;</i>
+          </a>
+        </div>
+        <div class="layui-card-body">
+          <table id="data_hash" lay-filter="list_action"></table>
+          <script type="text/html" id="toolbar_hash">
+              <a class="layui-btn layui-btn-xs" lay-event='status'>设置状态</a>
+              <a href="javascript:;" class="layui-btn layui-btn-xs" lay-event='edit'>编辑</a>
+              <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event='del'>删除</a>
+            </script>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/html" id="search_tpl_hash">
+  <form class="layui-form" action="">
+
+		<div class="layui-form-item">
+      <label class="layui-form-label">用户ID</label>
+      <div class="layui-input-block">
+        <input type="text" name="id"  placeholder="请输入用户ID "  autocomplete="off" class="layui-input">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">用户登陆名</label>
+      <div class="layui-input-block">
+        <input type="text" name="loginName"  placeholder="请输入用户登陆名 "  autocomplete="off" class="layui-input">
+      </div>
+    </div>
+
+		<div class="layui-form-item">
+      <label class="layui-form-label">用户邮箱</label>
+      <div class="layui-input-block">
+        <input type="text" name="loginEmail"  placeholder="请输入用户邮箱 "  autocomplete="off" class="layui-input">
+      </div>
+    </div>
+
+		<div class="layui-form-item">
+      <label class="layui-form-label">用户手机</label>
+      <div class="layui-input-block">
+        <input type="text" name="loginPhone"  placeholder="请输入用户手机 "  autocomplete="off" class="layui-input">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">数据状态</label>
+      <div class="layui-input-block">
+        <input type="radio" name="status" value="G_STATUS_USE" title="可用" checked>
+        <input type="radio" name="status" value="G_STATUS_NOUSE" title="禁用" >
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <div class="layui-input-block">
+        <button class="layui-btn" lay-submit lay-filter="form_hash"><i class="layui-icon">&#xe615;</i> 搜索</button>
+        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+      </div>
+    </div>
+  </form>
+</script>
+<!-- 脚本 -->
+<script>
+  layui.use(['jquery', 'table', 'laydate','sidebar', 'form'], function () {
+    var $ = layui.jquery,
+      layer = layui.layer,
+      table = layui.table,
+      sidebar = layui.sidebar,
+      form = layui.form;
+      
+    var laydate = layui.laydate;
+
+    var router = layui.router();
+    
+    table.render({
+      method: 'post',
+      // size: 'sm',
+      limit: 20,
+      elem: '#data_hash',
+      height: 'full-235',
+      url: '/sysd/account/list/data/', //数据接口
+      page: true, //开启分页
+      cols: [
+        [ //表头
+          {
+            field: 'id',
+            title: 'ID',
+            width: 80,
+            sort: true,
+            fixed: 'left'
+          }, {
+            field: 'loginName',
+            title: '登录名',
+            width: 80
+          }, {
+            field: 'loginEmail',
+            title: '登录邮箱',
+            width: 250,
+            sort: true
+          }, {
+            field: 'loginPhone',
+            title: '登录手机',
+            width: 100
+          }, {
+            field: 'loginOtherid',
+            title: '其它登录id',
+            width: 150
+          }, {
+            field: 'createDatetime',
+            title: '创建时间',
+            width: 200,
+            sort: true
+          }, {
+            field: 'codesetGstatus',
+            title: '状态',
+            width: 100,
+            sort: true
+          }, {
+            fixed: 'right',
+            title: '操作',
+            width: 200,
+            align: 'center',
+            toolbar: '#toolbar_hash'
+          }
+        ]
+      ]
+    });
+
+    $('#search_hash').on('click', function () {
+      var that = this;
+
+      sidebar.render({
+        elem: that,
+        content: $('#search_tpl_hash').html(),
+        title: '搜索',
+        shade: true,
+        width: '500px', //可以设置百分比和px
+        done: function () {
+          form.render();
+          //监听提交
+          form.on('submit(form_hash)', function (data) {
+            // layer.msg(JSON.stringify(data.field));
+            table.reload('data_hash', {
+              where: data.field
+            });
+            return false;
+          });
+        }
+      });
+    });
+    
+     //监听行工具事件
+     //注：tool 是工具条事件名，list_action 是 table 原始容器的属性 lay-filter="对应的值"
+	  table.on('tool(list_action)', function(obj){ 
+	    var data = obj.data //获得当前行数据
+	    ,layEvent = obj.event; //获得 lay-event 对应的值
+	    if(layEvent === 'status'){
+	      layer.confirm('将要设置本数据状态吗？', function(index){   
+	        $.post('/sysd/account/bo/status', "id="+data.id, function (res) {			      
+			      layer.msg("设置成功",{time:1*1000},function(){	
+			      	location.reload(); // 页面刷新	
+			    	})
+					}, 'json');
+				});
+	    } else if(layEvent === 'del'){
+	      layer.confirm('请确定删除（本操作不可恢复）', function(index){   
+	        $.post('/sysd/account/bo/del', "id="+data.id, function (res) {			      
+			      layer.msg("删除成功",{time:1*1000},function(){	
+			      	location.reload(); // 页面刷新	
+			    	})
+					}, 'json');
+				});
+	    } else if(layEvent === 'edit'){  	
+	    	$(this).attr("href" ,'#/sysd/account/boaction/EDIT?id='+data.id);
+	    }
+	  });
+  });
+</script>
+<!-- 样式 -->
+<style scoped>
+</style>
