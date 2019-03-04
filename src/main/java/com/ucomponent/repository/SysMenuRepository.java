@@ -30,5 +30,8 @@ public abstract interface SysMenuRepository extends JpaRepository<SysMenu, Integ
       + " order by menu.id,menu.levels,menu.seq", nativeQuery = true)
   public abstract List<SysMenu> getByUserId(int userId);
   
+  public abstract Page<SysMenu> findByNameContainingAndLevelsAndCodesetGstatusIn(String name,int levels,String status,Pageable pageable);
   public abstract Page<SysMenu> findByNameContainingAndCodesetGstatusIn(String name,String status,Pageable pageable);
+
+  public abstract Page<SysMenu> findByUpperIdAndCodesetGstatusIn(int pid,String status,Pageable pageable);
 }

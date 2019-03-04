@@ -12,8 +12,11 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import com.ucomponent.base.ICommons;
 import com.ucomponent.base.entity.CodeSetList;
+import com.ucomponent.po.UserAccount;
 import com.ucomponent.utils.StringTools;
 
 /**
@@ -131,11 +134,16 @@ public class BaseRestController implements ICommons{
 	 */
 	public void doSave(BasePO vo,HttpServletRequest request){
 	  String actionModel = StringTools.getString(request.getParameter("ACTIONMODE"));
+	  HttpSession session = request.getSession();
+	  UserAccount user = (UserAccount)session.getAttribute(SESSION_ACCOUNT);
     if(actionModel.equals("ADD")){
       vo.setCreateDatetime(new Date());
-      vo.setUpdateDatetime(new Date());   
+      vo.setUpdateDatetime(new Date());
+      vo.setUpdateUserId(user.getId());
+      vo.setCreateUserId(user.getId());
     }else if(actionModel.equals("EDIT")){
-      vo.setUpdateDatetime(new Date());   
+      vo.setUpdateDatetime(new Date());
+      vo.setUpdateUserId(user.getId());
     }
 	}
 	/**
@@ -143,15 +151,22 @@ public class BaseRestController implements ICommons{
 	 * @param vo
 	 * @param request
 	 */
-	public void doDelete(BasePO vo){
+	public void doDelete(BasePO vo,HttpServletRequest request){
+		HttpSession session = request.getSession();
+	  UserAccount user = (UserAccount)session.getAttribute(SESSION_ACCOUNT);
 	  vo.setCodesetGstatus("G_STATUS_DEL");
 	  vo.setUpdateDatetime(new Date());
+	  vo.setUpdateUserId(user.getId());
   }
 	/**
 	 * 更改状态
 	 * @param vo
 	 */
-	public void doStatus(BasePO vo){
+	public void doStatus(BasePO vo,HttpServletRequest request){
+		HttpSession session = request.getSession();
+	  UserAccount user = (UserAccount)session.getAttribute(SESSION_ACCOUNT);
+	  vo.setUpdateDatetime(new Date());
+	  vo.setUpdateUserId(user.getId());
 	  if(vo.getCodesetGstatus().equals("G_STATUS_USE")){
 	    vo.setCodesetGstatus("G_STATUS_NOUSE");
     }else if(vo.getCodesetGstatus().equals("G_STATUS_NOUSE")){

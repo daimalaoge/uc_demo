@@ -37,7 +37,6 @@ public class RestDemoController extends BaseRestController implements ICommons{
     //接收搜索参数
     String name = StringTools.getString(request.getParameter("name"));
     String status = StringTools.getString(request.getParameter("status"),"G_STATUS_USE");
-    if(status.equals("on")) status="1";
     //获取列表数据    
     Sort sort = new Sort(Sort.Direction.DESC,"updateDatetime"); //创建时间降序排序
     Pageable pageable = new PageRequest(super.getPage(request),super.getPageLimit(request),sort);
@@ -62,7 +61,7 @@ public class RestDemoController extends BaseRestController implements ICommons{
   public String bodel(HttpServletRequest request){
   	String id = StringTools.getString(request.getParameter("id"));
 		Demo demo = demoRepository.getOne(Integer.parseInt(id));	
-		super.doDelete(demo);
+		super.doDelete(demo,request);
 		demoRepository.save(demo);
   	return UCMANAGER_DATA_SUCCUSS;
   }
@@ -72,7 +71,7 @@ public class RestDemoController extends BaseRestController implements ICommons{
   public String bostatus(HttpServletRequest request){
   	String id = StringTools.getString(request.getParameter("id"));
 		Demo demo = demoRepository.getOne(Integer.parseInt(id));
-		super.doStatus(demo);
+		super.doStatus(demo,request);
 		demoRepository.save(demo);
   	return UCMANAGER_DATA_SUCCUSS;
   }
