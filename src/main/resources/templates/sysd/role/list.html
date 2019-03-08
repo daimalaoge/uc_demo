@@ -17,6 +17,7 @@
           <script type="text/html" id="toolbar_hash">
               <a class="layui-btn layui-btn-xs" lay-event='status'>设置状态</a>
               <a href="javascript:;" class="layui-btn layui-btn-xs" lay-event='edit'>编辑</a>
+							<a href="javascript:;" class="layui-btn layui-btn-xs" lay-event='menu'>菜单设置</a>
               <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event='del'>删除</a>
             </script>
         </div>
@@ -90,7 +91,7 @@
           }, {
             fixed: 'right',
             title: '操作',
-            width: 200,
+            width: 260,
             align: 'center',
             toolbar: '#toolbar_hash'
           }
@@ -143,6 +144,8 @@
 				});
 	    } else if(layEvent === 'edit'){  	
 	    	$(this).attr("href" ,'#/sysd/role/boaction/EDIT?id='+data.id);
+	    } else if(layEvent === 'menu'){  	
+	    	$(this).attr("href" ,'#/sysd/role/menuset?rid='+data.id);
 	    }
 	  });
   });

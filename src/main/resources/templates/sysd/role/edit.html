@@ -3,7 +3,7 @@
     <div class="layui-col-xs12">
       <div class="layui-card">
         <div class="layui-card-header">
-          <a href="#/demo/list" title="返回列表">
+          <a href="#/sysd/role/list" title="返回列表">
             <i class="layui-icon">&#xe65c;</i>
           </a>
           <span>${SHOWTITLE}</span>
@@ -14,59 +14,16 @@
           	<input type="hidden" name="ACTIONMODE" value="${ACTIONMODE}">
           	<input type="hidden" name="id" value ="<#if vo ??>${vo.id}</#if>" >          	
             <div class="layui-form-item">
-              <label class="layui-form-label">姓名</label>
+              <label class="layui-form-label">权限名称</label>
               <div class="layui-input-block">
-                <input type="text" name="name" value ="<#if vo ??>${vo.name}</#if>" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
-              </div>
-            </div>
-            
-            <div class="layui-form-item">
-              <label class="layui-form-label">积分</label>
-              <div class="layui-input-block">
-                <input type="text" name="point" value ="<#if vo ??>${vo.point}</#if>" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
-              </div>
-            </div>
-            
-            <div class="layui-form-item">
-              <label class="layui-form-label">存款</label>
-              <div class="layui-input-block">
-                <input type="text" name="deposit" value ="<#if vo ??>${vo.deposit}</#if>" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
-              </div>
-            </div>
-            <div class="layui-form-item">
-              <label class="layui-form-label">选择框</label>
-              <div class="layui-input-block">
-                <select name="city" >
-                  <option value=""></option>
-                  <option value="0">北京</option>
-                  <option value="1">上海</option>
-                  <option value="2">广州</option>
-                  <option value="3">深圳</option>
-                  <option value="4">杭州</option>
-                </select>
-              </div>
-            </div>
-            <div class="layui-form-item">
-              <label class="layui-form-label">性别</label>
-              <div class="layui-input-block">
-                <select name="codesetSex" lay-verify="required" >
-                <#list SEXLIST! as sex>
-				          <option value="${sex.codeKey}" <#if vo ??><#if vo.codesetSex == sex.codeKey >selected</#if></#if> >${sex.name}</option>
-								</#list>
-				        </select>
-              </div>
-            </div>
-            <div class="layui-form-item">
-              <label class="layui-form-label">开关</label>
-              <div class="layui-input-block">
-                <input type="checkbox" name="switch" lay-skin="switch">
+                <input type="text" name="name" value ="<#if vo ??>${vo.name}</#if>" required lay-verify="required" placeholder="请输入权限名称" autocomplete="off" class="layui-input">
               </div>
             </div>
 
             <div class="layui-form-item layui-form-text">
               <label class="layui-form-label">备注</label>
               <div class="layui-input-block">
-                <textarea name="descp" placeholder="请输入内容" class="layui-textarea"><#if vo ??>${vo.descp}</#if></textarea>
+                <textarea name="descp" placeholder="请输入内容" class="layui-textarea"><#if vo ??>${vo.remarks}</#if></textarea>
               </div>
             </div>
             <div class="layui-form-item">
@@ -89,7 +46,7 @@
     form.render();
     //监听提交
     form.on('submit(form_hash)', function (data) {
-      $.post('/demo/bo/save', data.field, function (res) {
+      $.post('/sysd/role/bo/save', data.field, function (res) {
 			  if (res==1) {
 		      layer.open({
 		        type: 1

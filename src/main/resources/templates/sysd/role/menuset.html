@@ -1,0 +1,141 @@
+<div class="layui-fluid">
+	<form class="layui-form" action="">
+		<div class="layui-form-item">
+	    <div class="layui-input-block">
+	      <button type="button" class="layui-btn sure-btn">确定</button>
+	      <button type="button" class="layui-btn  open-all">全部展开</button>
+				<button type="button" class="layui-btn  close-all">全部关闭</button>
+	    </div>
+	  </div>
+	  <div>
+			<table class="layui-table layui-form" id="LAYUI_tree-table_DOM___________" lay-size="sm" ></table>
+		</div>
+	</form>
+</div>
+		
+<script type="text/javascript">
+	layui.use(['treeTable','layer','code','form'],function(){
+		var $ = layui.jquery,
+			o = layui.$,
+			form = layui.form,
+			layer = layui.layer,
+			treeTable = layui.treeTable;
+		// 直接下载后url: './data/table-tree.json',这个配置可能看不到数据，改为data:[],获取自己的实际链接返回json数组
+		var	re = treeTable.render({
+			elem: '#LAYUI_tree-table_DOM___________',
+			url: '/sysd/role/menuset/data/',	
+						
+			is_checkbox: true,
+			icon_key: 'name',
+			primary_key: 'id',
+			parent_key: 'upperId',
+			checked: {
+				key: 'id',
+				data: [${mr_rsdata}],
+			},
+			end: function(e){
+				form.render();
+			},
+			cols: [
+				{
+					key: 'name',
+					title: '名称',
+					width: '160px',
+					template: function(item){
+						if(item.levels == 1){
+							return '<span style="color:red;">'+item.name+'</span>';
+						}else if(item.levels == 2){
+							return '<span style="color:green;">'+item.name+'</span>';
+						}else if(item.levels == 3){
+							return '<span style="color:#aaa;">'+item.name+'</span>';
+						}
+					},
+				},
+				{
+					key: 'id',
+					title: 'ID',
+					width: '100px',
+					align: 'center',
+				},
+				{
+					key: 'upperId',
+					title: '上级ID',
+					width: '100px',
+					align: 'center',
+				},{
+					key: 'url',
+					title: 'URL',
+					width: '200px',
+					align: 'left',
+				},{
+					key: 'codesetMenutype',
+					title: '菜单类型',
+					width: '200px',
+					align: 'left',
+				},{
+					key: 'remarks',
+					title: '备注',
+					width: '100px',
+					align: 'left',
+				}						
+			]
+		});
+		
+		// 监听checkbox选择
+		treeTable.on('tree(box)',function(data){
+			if(o(data.elem).parents('#LAYUI_tree-table_DOM___________').length){
+				var text = [];
+				o(data.elem).parents('#LAYUI_tree-table_DOM___________').find('.cbx.layui-form-checked').each(function(){
+					o(this).parents('[data-pid]').length && text.push(o(this).parents('td').next().find('span').text());
+				})
+				o(data.elem).parents('#LAYUI_tree-table_DOM___________').prev().find('input').val(text.join(','));
+			}
+			//console.log(JSON.stringify(data));
+		})
+		// 监听自定义
+		// 获取选中值，返回值是一个数组（定义的primary_key参数集合）
+		o('.get-checked').click(function(){
+			layer.msg('选中参数'+treeTable.checked(re).join(','))
+		})
+		// 全部展开
+		o('.open-all').click(function(){
+			treeTable.openAll(re);
+		})
+		// 全部关闭
+		o('.close-all').click(function(){
+			treeTable.closeAll(re);
+		})
+		//确认
+		o('.sure-btn').click(function(data){
+			var text = [];
+      $(".layui-form-checked").each(function(){
+				var d = o(this).parents('tr').data();				
+				text.push(d.id);
+      });
+
+			$.post('/sysd/role/menuset/save', 'rid=${rid}&treedate='+text, function (res) {
+			  if (res==1) {
+		      layer.open({
+		        type: 1
+		        ,title: '操作成功' 
+		        ,closeBtn: false
+		        ,area: '300px;'
+		        ,shade: 0.8
+		        ,id: 'VO_ACTION' //设定一个id，防止重复弹出
+		        ,btn: ['确定']
+		        ,btnAlign: 'c'
+		        ,moveType: 1 //拖拽模式，0或者1
+		        ,yes: function(index){
+        			layer.close(index);         			
+    				},
+		      });
+				}else{
+					layer.msg("操作失败，请稍后重试", {time: 2000});
+				}
+			}, 'json');
+      return false;
+		})
+
+	})
+</script>
+

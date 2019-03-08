@@ -62,6 +62,7 @@
     ,slider: 'modules/slider' //滑块
     ,carousel: 'modules/carousel' //轮播
     ,flow: 'modules/flow' //流加载
+    ,treeTable: 'modules/treeTable' //树形表格
     ,util: 'modules/util' //工具块
     ,code: 'modules/code' //代码修饰器
     ,jquery: 'modules/jquery' //DOM库（第三方）
@@ -126,6 +127,7 @@
     ,timeout = 0;
     exports = exports || [];
 
+
     //静态资源host
     config.host = config.host || (dir.match(/\/\/([\s\S]+?)\//)||['//'+ location.host +'/'])[0];
     
@@ -168,10 +170,10 @@
       //如果是扩展模块，则判断模块路径值是否为 {/} 开头，
       //如果路径值是 {/} 开头，则模块路径即为后面紧跟的字符。
       //否则，则按照 base 参数拼接模块路径
+      
       ,url = ( modules[item] ? (dir + 'lay/') 
         : (/^\{\/\}/.test(that.modules[item]) ? '' : (config.base || ''))
       ) + (that.modules[item] || item) + '.js';
-      
       url = url.replace(/^\{\/\}/, '');
       
       node.async = true;
@@ -182,7 +184,6 @@
         : (config.version||'');
         return version ? ('?v=' + version) : '';
       }();
-      
       head.appendChild(node);
       
       if(node.attachEvent && !(node.attachEvent.toString && node.attachEvent.toString().indexOf('[native code') < 0) && !isOpera){
