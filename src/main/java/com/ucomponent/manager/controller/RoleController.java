@@ -1,5 +1,8 @@
 package com.ucomponent.manager.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.ucomponent.base.ICommons;
 import com.ucomponent.base.annotation.ActionName;
 import com.ucomponent.base.controller.BaseController;
+import com.ucomponent.base.entity.JsonlistData;
+import com.ucomponent.po.SysMenu;
 import com.ucomponent.po.SysRole;
+import com.ucomponent.po.SysRoleMenuRs;
+import com.ucomponent.repository.SysMenuRepository;
+import com.ucomponent.repository.SysRoleMenuRsRepository;
 import com.ucomponent.repository.SysRoleRepository;
 import com.ucomponent.utils.StringTools;
 
@@ -26,6 +34,10 @@ import com.ucomponent.utils.StringTools;
 public class RoleController extends BaseController implements ICommons{
 	@Autowired
   private SysRoleRepository sysRoleRepository;
+	@Autowired
+  private SysMenuRepository sysMenuRepository;
+	@Autowired
+  private SysRoleMenuRsRepository sysRoleMenuRsRepository;
 	
 	@ActionName(value = "Role page List") 
 	@RequestMapping("/list")
@@ -49,7 +61,27 @@ public class RoleController extends BaseController implements ICommons{
 			model.addAttribute("ACTIONMODE",UCMANAGER_ACTION_EDIT);
 			model.addAttribute("vo",sysRoleRepository.getOne(Integer.parseInt(id)));
 		}
-    return "sysd/menu/edit";
-  }	
+    return "sysd/role/edit";
+  }
+	
+	@ActionName(value = "Role - Menu setup") 
+	@RequestMapping("/menuset")
+	public String menuset(Model model,HttpServletRequest request){
+		String rid = StringTools.getString(request.getParameter("rid"));
+		model.addAttribute("rid",rid);
+		List<SysRoleMenuRs> list = sysRoleMenuRsRepository.findByRoleId(Integer.parseInt(rid));
+		StringBuffer irs = new StringBuffer();
+		int i = list.size();
+		for(SysRoleMenuRs rs:list) {
+			irs.append(String.valueOf(rs.getMenuId()));
+			i--;
+			if(i!=0) {
+				irs.append(",");
+			}
+		}
+		model.addAttribute("mr_rsdata",irs);
+		return "sysd/role/menuset";
+	}
+	
 }
 

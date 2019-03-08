@@ -34,4 +34,6 @@ public abstract interface SysMenuRepository extends JpaRepository<SysMenu, Integ
   public abstract Page<SysMenu> findByNameContainingAndCodesetGstatusIn(String name,String status,Pageable pageable);
 
   public abstract Page<SysMenu> findByUpperIdAndCodesetGstatusIn(int pid,String status,Pageable pageable);
+  
+  public abstract List<SysMenu> findByCodesetGstatusOrderByLevelsAscSeqAsc(String status);
 }
