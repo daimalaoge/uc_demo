@@ -19,7 +19,7 @@ CREATE TABLE `ucm_demo` (
 
 CREATE TABLE `ucm_sys_operation_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL,
+  `user_id` varchar(20) DEFAULT '',
   `title` varchar(255) DEFAULT NULL COMMENT '日志标题',
   `codeset_oplogtype` varchar(255) DEFAULT NULL COMMENT '日志类型',
   `remote_addr` varchar(255) DEFAULT '' COMMENT '请求地址',
@@ -32,7 +32,7 @@ CREATE TABLE `ucm_sys_operation_log` (
   `result` varchar(255) DEFAULT NULL,
   `create_datetime` datetime DEFAULT NULL COMMENT '创建日期',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8 COMMENT='系统操作日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=2958 DEFAULT CHARSET=utf8 COMMENT='系统操作日志表';
 
 CREATE TABLE `ucm_sys_codeset` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -40,7 +40,7 @@ CREATE TABLE `ucm_sys_codeset` (
   `code_key` varchar(30) NOT NULL DEFAULT '' COMMENT '编码',
   `level` varchar(2) NOT NULL DEFAULT '' COMMENT '级别',
   `descp` varchar(500) NOT NULL DEFAULT '' COMMENT '说明',
-  `p_code` varchar(30) NOT NULL DEFAULT '' COMMENT '上级编码',
+  `upper_code` varchar(30) NOT NULL DEFAULT '' COMMENT '上级编码',
   `attr_value1` varchar(255) DEFAULT '',
   `attr_value2` varchar(255) DEFAULT '',
   `attr_value3` varchar(255) DEFAULT '',
@@ -71,17 +71,21 @@ CREATE TABLE `ucm_sys_role_menu_rs` (
 CREATE TABLE `ucm_sys_menu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT '' COMMENT '菜单名称',
-  `p_id` int(11) DEFAULT '0' COMMENT '上级菜单',
+  `upper_id` int(11) DEFAULT '0' COMMENT '上级菜单',
   `seq` tinyint(4) DEFAULT '0' COMMENT '顺序',
   `url` varchar(500) DEFAULT '' COMMENT '跳转地址',
-  `url_data` varchar(255) DEFAULT NULL,
+  `url_data` varchar(255) DEFAULT '',
   `icon` varchar(500) DEFAULT '' COMMENT '图标',
-  `level` tinyint(4) DEFAULT '0' COMMENT '级别 1-3',
+  `levels` tinyint(4) DEFAULT '0' COMMENT '级别 1-3',
   `codeset_menutype` varchar(20) DEFAULT '',
   `codeset_gstatus` varchar(20) DEFAULT '',
   `remarks` varchar(1000) DEFAULT '' COMMENT '备注',
+  `create_datetime` datetime DEFAULT NULL,
+  `update_datetime` datetime DEFAULT NULL,
+  `create_user_id` int(11) DEFAULT '0',
+  `update_user_id` int(11) DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='系统菜单表';
+) ENGINE=InnoDB AUTO_INCREMENT=22225 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='系统菜单表';
 
 CREATE TABLE `ucm_user_account` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -112,10 +116,10 @@ CREATE TABLE `ucm_sys_role` (
   `remarks` varchar(255) DEFAULT '',
   `create_user_id` int(11) DEFAULT '0',
   `update_user_id` int(11) DEFAULT '0',
-  `create_date` datetime DEFAULT NULL,
-  `update_date` datetime DEFAULT NULL,
+  `create_datetime` datetime DEFAULT NULL,
+  `update_datetime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='系统角色表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='系统角色表';
 
 INSERT INTO `uc_main_demo`.`ucm_sys_codeset`(`id`, `name`, `code_key`, `level`, `descp`, `p_code`, `attr_value1`, `attr_value2`, `attr_value3`, `attr_value4`, `attr_value5`, `attr_value6`, `attr_value7`, `attr_value8`, `attr_value9`, `attr_value10`, `seq`, `codeset_gstatus`, `create_datetime`, `update_datetime`, `create_user_id`, `update_user_id`) VALUES (1, '性别', 'SEX', '1', '', '', '', '', '', '', '', '', '', '', '', '', 0, 'G_STATUS_USE', '2018-11-08 11:07:18', '2018-11-08 11:07:18', 0, 0);
 INSERT INTO `uc_main_demo`.`ucm_sys_codeset`(`id`, `name`, `code_key`, `level`, `descp`, `p_code`, `attr_value1`, `attr_value2`, `attr_value3`, `attr_value4`, `attr_value5`, `attr_value6`, `attr_value7`, `attr_value8`, `attr_value9`, `attr_value10`, `seq`, `codeset_gstatus`, `create_datetime`, `update_datetime`, `create_user_id`, `update_user_id`) VALUES (2, '男', 'MAN', '2', '', 'SEX', '', '', '', '', '', '', '', '', '', '', 0, 'G_STATUS_USE', '2018-11-08 11:07:18', '2018-11-08 11:07:18', 0, 0);
