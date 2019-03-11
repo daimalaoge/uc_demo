@@ -56,8 +56,8 @@
 	              <div class="layui-input-block">
 	                <select name="levels" required>
 	                  <#if (plevels == 0)><option value="1" <#if vo ??><#if vo.levels == 1 >selected</#if></#if>>一级</option></#if>
-	                  <#if (plevels == 1) ><option value="2" <#if vo ??><#if vo.levels == 2 >selected</#if></#if>>二级</option></#if>
-	                  <#if (plevels == 2) ><option value="3" <#if vo ??><#if vo.levels == 3 >selected</#if></#if>>三级</option></#if>
+	                  <#if (plevels < 2) ><option value="2" <#if vo ??><#if vo.levels == 2 >selected</#if></#if>>二级</option></#if>
+	                  <#if (plevels > 1) ><option value="3" <#if vo ??><#if vo.levels == 3 >selected</#if></#if>>三级</option></#if>
 	                </select>
 	              </div>
 	            </div>

@@ -4,12 +4,13 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
 
 import lombok.Data;
 
 @MappedSuperclass
 @Data
-public class BasePO implements Serializable{
+public class BasePO extends BaseLayuiVO implements Serializable{
 	private static final long serialVersionUID = 1L;
   @Column
   private String codesetGstatus = "G_STATUS_USE";
@@ -20,5 +21,5 @@ public class BasePO implements Serializable{
   @Column
   private int createUserId = 100;
   @Column
-  private int updateUserId = 0;
+  private int updateUserId = 0;  
 }

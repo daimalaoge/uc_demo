@@ -16,7 +16,9 @@ import com.ucomponent.base.ICommons;
 import com.ucomponent.base.annotation.ActionName;
 import com.ucomponent.base.controller.BaseController;
 import com.ucomponent.po.UserAccount;
+import com.ucomponent.po.UserRoleRs;
 import com.ucomponent.repository.UserAccountRepository;
+import com.ucomponent.repository.UserRoleRsRepository;
 import com.ucomponent.utils.StringTools;
 
 /**
@@ -30,6 +32,8 @@ import com.ucomponent.utils.StringTools;
 public class AccountController extends BaseController implements ICommons{
 	@Autowired
   private UserAccountRepository userAccountRepository;
+	@Autowired
+  private UserRoleRsRepository userRoleRsRepository;
 	
 	@ActionName(value = "Account page List") 
 	@RequestMapping("/list")
@@ -56,5 +60,13 @@ public class AccountController extends BaseController implements ICommons{
 		}
     return "sysd/account/edit";
   }	
+	
+	@ActionName(value = "Account - Role setup") 
+	@RequestMapping("/roleset")
+	public String roleset(Model model,HttpServletRequest request){
+		String uid = StringTools.getString(request.getParameter("uid"));
+		model.addAttribute("uid",uid);
+		return "sysd/account/roleset";
+	}
 }
 

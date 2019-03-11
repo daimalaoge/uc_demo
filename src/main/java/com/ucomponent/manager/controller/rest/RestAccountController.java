@@ -1,5 +1,8 @@
 package com.ucomponent.manager.controller.rest;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +17,12 @@ import com.ucomponent.base.ICommons;
 import com.ucomponent.base.annotation.ActionName;
 import com.ucomponent.base.controller.BaseRestController;
 import com.ucomponent.base.entity.JsonlistData;
+import com.ucomponent.po.SysRole;
 import com.ucomponent.po.UserAccount;
+import com.ucomponent.po.UserRoleRs;
+import com.ucomponent.repository.SysRoleRepository;
 import com.ucomponent.repository.UserAccountRepository;
+import com.ucomponent.repository.UserRoleRsRepository;
 import com.ucomponent.utils.MD5Util;
 import com.ucomponent.utils.StringTools;
 
@@ -30,6 +37,10 @@ import com.ucomponent.utils.StringTools;
 public class RestAccountController extends BaseRestController implements ICommons{
 	@Autowired
   private UserAccountRepository userAccountRepository;
+	@Autowired
+  private UserRoleRsRepository userRoleRsRepository;
+	@Autowired
+  private SysRoleRepository sysRoleRepository;
 	
 	@ActionName(value = "get UserAccount list data") 
   @RequestMapping("/list/data")
@@ -60,6 +71,28 @@ public class RestAccountController extends BaseRestController implements ICommon
     jd.setCount(pagedata.getTotalElements());
     System.out.println("pagedata.getContent()-"+pagedata.getContent());
     jd.setData(super.codeKeyConvert(pagedata.getContent()));
+    return jd;
+  }
+	
+	@ActionName(value = "User get RoleSet list data") 
+  @RequestMapping("/roleset/data")
+	public JsonlistData rolesetList(HttpServletRequest request){    
+		//接收页面参数
+		String uid = StringTools.getString(request.getParameter("uid"));
+    JsonlistData jd = new JsonlistData();
+    List list = sysRoleRepository.findByCodesetGstatus("G_STATUS_USE");
+		List<UserRoleRs> listr = userRoleRsRepository.findByUserId(Integer.parseInt(uid));
+		int i = list.size();
+		for(UserRoleRs rs:listr) {
+			int roid = rs.getRoleId();
+			for(Object inob:list) {
+				SysRole in  = (SysRole)inob;
+				if(in.getId() == roid) {
+					in.setLAY_CHECKED(true);
+				}
+			}
+		}
+    jd.setData(list);
     return jd;
   }
   
@@ -132,5 +165,28 @@ public class RestAccountController extends BaseRestController implements ICommon
 		userAccountRepository.save(userAccount);
   	return UCMANAGER_DATA_SUCCUSS;
   }
+  
+  @ActionName(value = "User User-Role_RS save")
+  @RequestMapping("/roleset/save")
+	public String rolesetSave(HttpServletRequest request){
+		String uid = StringTools.getString(request.getParameter("uid"));
+		String treedate = StringTools.getString(request.getParameter("treedate"));
+		userRoleRsRepository.deleteUrrsByRole(Integer.parseInt(uid));
+		
+		List<UserRoleRs> list = new ArrayList();
+		if(!treedate.equals("")) {
+			String[] ids = treedate.split(",");
+			for(String id:ids) {
+				UserRoleRs rs = new UserRoleRs();
+				rs.setRoleId(Integer.parseInt(id));
+				rs.setUserId(Integer.parseInt(uid));
+				list.add(rs);
+			}
+		}
+		if(!list.isEmpty()) {
+			userRoleRsRepository.saveAll(list);
+		}
+		return UCMANAGER_DATA_SUCCUSS;
+	}
 }
 

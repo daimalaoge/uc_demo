@@ -35,8 +35,6 @@ public class RoleController extends BaseController implements ICommons{
 	@Autowired
   private SysRoleRepository sysRoleRepository;
 	@Autowired
-  private SysMenuRepository sysMenuRepository;
-	@Autowired
   private SysRoleMenuRsRepository sysRoleMenuRsRepository;
 	
 	@ActionName(value = "Role page List") 
