@@ -15,6 +15,7 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 import com.ucomponent.base.cover.DefaultCover;
 import com.ucomponent.base.cover.MyFreemarkerView;
 import com.ucomponent.manager.service.InitService;
+
 import io.undertow.UndertowOptions;
 
 /**

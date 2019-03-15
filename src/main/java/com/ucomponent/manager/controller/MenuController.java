@@ -35,7 +35,7 @@ public class MenuController extends BaseController implements ICommons{
 	@ActionName(value = "System Menu List") 
 	@RequestMapping("/list")
   public String list(Model model,HttpServletRequest request){		
-    return "sysd/menu/list";
+    return "sysd/menu/menuset";
   }
 	
 	@ActionName(value = "System Menu inner List") 

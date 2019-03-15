@@ -1,5 +1,7 @@
 package com.ucomponent.manager.controller.rest;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,28 +34,29 @@ public class RestMenuController extends BaseRestController implements ICommons{
 	
 	@ActionName(value = "get Menu list data") 
   @RequestMapping("/list/data")
-	public JsonlistData listdata(HttpServletRequest request){
+	public List listdata(HttpServletRequest request){
     //接收页面参数
-    JsonlistData jd = new JsonlistData();
-    //接收搜索参数
-    String name = StringTools.getString(request.getParameter("name"));
-    String levels = StringTools.getString(request.getParameter("levels"));
-    String status = StringTools.getString(request.getParameter("status"),"G_STATUS_USE");
-   
-    //获取列表数据    
-    Sort sort = new Sort(Sort.Direction.DESC,"levels","seq"); //创建时间降序排序
-    Pageable pageable = new PageRequest(super.getPage(request),super.getPageLimit(request),sort);
-    Page pagedata = null;
-    if(levels.equals("")) {
-    	pagedata = sysMenuRepository.findByNameContainingAndCodesetGstatusIn(name,status,pageable);
-    }else {
-    	pagedata = sysMenuRepository.findByNameContainingAndLevelsAndCodesetGstatusIn(name,Integer.parseInt(levels),status,pageable);
-    }
-    //返回页面数据
-    jd.setCode(UCMANAGER_LISTPAGE_CODE);
-    jd.setCount(pagedata.getTotalElements());
-    jd.setData(super.codeKeyConvert(pagedata.getContent()));
-    return jd;
+//    JsonlistData jd = new JsonlistData();
+//    //接收搜索参数
+//    String name = StringTools.getString(request.getParameter("name"));
+//    String levels = StringTools.getString(request.getParameter("levels"));
+//    String status = StringTools.getString(request.getParameter("status"),"G_STATUS_USE");
+//   
+//    //获取列表数据    
+//    Sort sort = new Sort(Sort.Direction.DESC,"levels","seq"); //创建时间降序排序
+//    Pageable pageable = new PageRequest(super.getPage(request),super.getPageLimit(request),sort);
+//    Page pagedata = null;
+//    if(levels.equals("")) {
+//    	pagedata = sysMenuRepository.findByNameContainingAndCodesetGstatusIn(name,status,pageable);
+//    }else {
+//    	pagedata = sysMenuRepository.findByNameContainingAndLevelsAndCodesetGstatusIn(name,Integer.parseInt(levels),status,pageable);
+//    }
+//    //返回页面数据
+//    jd.setCode(UCMANAGER_LISTPAGE_CODE);
+//    jd.setCount(pagedata.getTotalElements());
+//    jd.setData(super.codeKeyConvert(pagedata.getContent()));		
+		List list = sysMenuRepository.findAll();
+    return super.codeKeyConvert(list);
   }
 	
 	@ActionName(value = "get Menu inner list data") 

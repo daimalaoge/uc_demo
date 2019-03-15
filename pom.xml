@@ -9,6 +9,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>UC_Manager</name>
 	<description>Union Component Demo </description>
+	<packaging>jar</packaging>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
