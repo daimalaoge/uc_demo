@@ -1,224 +1,155 @@
-<!-- 模板 -->
 <div class="layui-fluid">
-  <div class="layui-row">
-    <div class="layui-col-xs12">
-      <div class="layui-card">
-        <div class="layui-card-header">
-          <a href="#/demo/boaction/ADD" class="layui-btn layui-btn-xs">
-            <i class="layui-icon">&#xe654;</i>
-            <span>新增</span>
-          </a>
-          <a href="javascript:;" class="layui-btn layui-btn-xs layui-btn-primary" id="search_hash">
-            <i class="layui-icon">&#xe615;</i>
-          </a>
-        </div>
-        <div class="layui-card-body">
-          <table id="data_hash" lay-filter="list_action"></table>
-          <script type="text/html" id="toolbar_hash">
-              <a class="layui-btn layui-btn-xs" lay-event='status'>设置状态</a>
-              <a href="javascript:;" class="layui-btn layui-btn-xs" lay-event='edit'>编辑</a>
-              <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event='del'>删除</a>
-            </script>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<script type="text/html" id="search_tpl_hash">
   <form class="layui-form" action="">
     <div class="layui-form-item">
-      <label class="layui-form-label">名称</label>
       <div class="layui-input-block">
-        <input type="text" name="name"  placeholder="请输入名称.." autocomplete="off" class="layui-input">
+        <a class="layui-btn " lay-filter="sure-btn" target="_top" href="#/sysd/setd/boaction/ADD">新增一级</a>
+        <button type="button" class="layui-btn  open-all">全部展开</button>
+        <button type="button" class="layui-btn  close-all">全部关闭</button>
       </div>
     </div>
-
-		<div class="layui-form-item">
-      <label class="layui-form-label">代码</label>
-      <div class="layui-input-block">
-        <input type="text" name="codeKey"  placeholder="请输入代码.." autocomplete="off" class="layui-input">
-      </div>
-    </div>
-
-		<div class="layui-form-item">
-      <label class="layui-form-label">上级代码</label>
-      <div class="layui-input-block">
-        <input type="text" name="upperCode"  placeholder="请输入上级代码.." autocomplete="off" class="layui-input">
-      </div>
-    </div>
-
-    <div class="layui-form-item">
-      <label class="layui-form-label">数据状态</label>
-      <div class="layui-input-block">
-        <input type="radio" name="status" value="G_STATUS_USE" title="可用" checked>
-        <input type="radio" name="status" value="G_STATUS_NOUSE" title="禁用" >
-      </div>
-    </div>
-    <div class="layui-form-item">
-      <div class="layui-input-block">
-        <button class="layui-btn" lay-submit lay-filter="form_hash"><i class="layui-icon">&#xe615;</i> 搜索</button>
-        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-      </div>
+    <div>
+      <table class="layui-table layui-form" id="LAYUI_tree-table_DOM___________" lay-size="sm" ></table>
     </div>
   </form>
-</script>
-<!-- 脚本 -->
-<script>
-  layui.use(['jquery', 'table', 'sidebar', 'form'], function () {
+</div>
+
+<script type="text/javascript">
+  layui.use(['treeTable','layer','code','form'],function(){
     var $ = layui.jquery,
-      layer = layui.layer,
-      table = layui.table,
-      sidebar = layui.sidebar,
-      form = layui.form;
-    var router = layui.router();
-    //第一个实例
-    table.render({
-      method: 'post',
-      // size: 'sm',
-      limit: 20,
-      elem: '#data_hash',
-      height: 'full-235',
-      url: '/sysd/setd/list/data/', //数据接口
-      page: true, //开启分页
+            o = layui.$,
+            form = layui.form,
+            layer = layui.layer,
+            treeTable = layui.treeTable;
+    // 直接下载后url: './data/table-tree.json',这个配置可能看不到数据，改为data:[],获取自己的实际链接返回json数组
+    var	re = treeTable.render({
+      elem: '#LAYUI_tree-table_DOM___________',
+      url: '/sysd/setd/list/data/',
+
+      is_checkbox: false,
+      icon_key: 'name',
+      primary_key: 'codeKey',
+      parent_key: 'upperCode',
+      cellMinWidth: 80,
+      end: function(e){
+        form.render();
+      },
       cols: [
-        [ //表头
-          {
-            field: 'id',
-            title: 'ID',
-            width: 80,
-            sort: true,
-            fixed: 'left'
-          }, {
-            field: 'name',
-            title: '名称',
-            width: 120
-          }, {
-            field: 'codeKey',
-            title: '编码',
-            width: 150,
-            sort: true
-          }, {
-            field: 'upperCode',
-            title: '上级编码',
-            width: 150,
-            sort: true
-          }, {
-            field: 'level',
-            title: '级别',
-            width: 80
-          }, {
-            field: 'seq',
-            title: '顺序',
-            width: 80
-          }, {
-            field: 'attrValue1',
-            title: '字段1',
-            width: 100
-          }, {
-            field: 'attrValue2',
-            title: '字段2',
-            width: 110
-          }, {
-            field: 'attrValue3',
-            title: '字段3',
-            width: 110
-          }, {
-            field: 'attrValue4',
-            title: '字段4',
-            width: 110
-          }, {
-            field: 'attrValue5',
-            title: '字段5',
-            width: 110
-          }, {
-            field: 'attrValue6',
-            title: '字段6',
-            width: 110
-          }, {
-            field: 'attrValue7',
-            title: '字段7',
-            width: 110
-          }, {
-            field: 'attrValue8',
-            title: '字段8',
-            width: 110
-          }, {
-            field: 'attrValue9',
-            title: '字段9',
-            width: 110
-          }, {
-            field: 'attrValue10',
-            title: '字段10',
-            width: 110
-          }, {
-            field: 'descp',
-            title: '备注',
-            width: 100
-          }, {
-            field: 'codesetGstatus',
-            title: '状态',
-            width: 100,
-            sort: true
-          }, {
-            fixed: 'right',
-            title: '操作',
-            width: 200,
-            align: 'center',
-            toolbar: '#toolbar_hash'
-          }
-        ]
+        {
+          key: 'name',
+          title: '名称',
+          width: '160px',
+        },
+        {
+          key: 'codeKey',
+          title: 'codeKey',
+          width: '100px',
+          align: 'center',
+        },{
+          key: 'attrValue1',
+          title: 'attrValue1',
+          align: 'center',
+        },{
+          key: 'attrValue2',
+          title: 'attrValue2',
+          align: 'center',
+        },{
+          key: 'attrValue3',
+          title: 'attrValue3',
+          align: 'center',
+        },{
+          key: 'attrValue4',
+          title: 'attrValue4',
+          align: 'center',
+        },{
+          key: 'attrValue5',
+          title: 'attrValue5',
+          align: 'center',
+        },{
+          key: 'attrValue6',
+          title: 'attrValue6',
+          width: '200px',
+          align: 'center',
+        },{
+          key: 'attrValue7',
+          title: 'attrValue7',
+          align: 'center',
+        },{
+          key: 'attrValue8',
+          title: 'attrValue8',
+          width: '200px',
+          align: 'center',
+        } ,{
+          key: 'attrValue9',
+          title: 'attrValue9',
+          align: 'center',
+        },{
+          key: 'attrValue10',
+          title: 'attrValue10',
+          align: 'center',
+        },{
+          key: 'seq',
+          title: '次序',
+          width: '100px',
+          align: 'center',
+        },{
+          key: 'descp',
+          title: '说明',
+          width: '200px',
+          align: 'center',
+        },{
+          key: 'codesetGstatus',
+          title: '状态',
+          width: '100px',
+          align: 'center',
+        },{
+          title: '操作',
+          align: 'center',
+          width: '200px',
+          template: function(item){
+            return '<a class="layui-btn layui-btn-xs" lay-filter="tabset_status">设置状态</a>'+
+                    '<a href="javascript:;" class="layui-btn layui-btn-xs" lay-filter="tabset_edit">编辑</a>'+
+                    '<a href="javascript:;" class="layui-btn layui-btn-xs" lay-filter="tabset_list2">下级</a>';
+          },
+        },
       ]
     });
 
-    $('#search_hash').on('click', function () {
-      var that = this;
-      sidebar.render({
-        elem: that,
-        content: $('#search_tpl_hash').html(),
-        title: '搜索',
-        shade: true,
-        width: '500px', //可以设置百分比和px
-        done: function () {
-          form.render();
-          //监听提交
-          form.on('submit(form_hash)', function (data) {
-            // layer.msg(JSON.stringify(data.field));
-            table.reload('data_hash', {
-              where: data.field
-            });
-            return false;
-          });
-        }
+    treeTable.on('tree(tabset_status)',function(obj){
+      var data = obj.item //获得当前行数据
+              ,layEvent = obj.event; //获得 lay-event 对应的值
+      layer.confirm('将要设置本数据状态吗？', function(index){
+        $.post('/sysd/setd/bo/status', "id="+data.id, function (res) {
+          layer.msg("设置成功",{time:1*1000},function(){
+            location.reload(); // 页面刷新
+          })
+        }, 'json');
       });
     });
-    
-     //监听行工具事件
-     //注：tool 是工具条事件名，list_action 是 table 原始容器的属性 lay-filter="对应的值"
-	  table.on('tool(list_action)', function(obj){ 
-	    var data = obj.data //获得当前行数据
-	    ,layEvent = obj.event; //获得 lay-event 对应的值
-	    if(layEvent === 'status'){
-	      layer.confirm('将要设置本数据状态吗？', function(index){   
-	        $.post('/sysd/setd/bo/status', "id="+data.id, function (res) {			      
-			      layer.msg("设置成功",{time:1*1000},function(){	
-			      	location.reload(); // 页面刷新	
-			    	})
-					}, 'json');
-				});
-	    } else if(layEvent === 'del'){
-	      layer.confirm('请确定删除（本操作不可恢复）', function(index){   
-	        $.post('/sysd/setd/bo/del', "id="+data.id, function (res) {			      
-			      layer.msg("删除成功",{time:1*1000},function(){	
-			      	location.reload(); // 页面刷新	
-			    	})
-					}, 'json');
-				});
-	    } else if(layEvent === 'edit'){  	
-	    	$(this).attr("href" ,'#/sysd/setd/boaction/EDIT?id='+data.id);
-	    }
-	  });
-  });
+
+    treeTable.on('tree(tabset_edit)',function(obj){
+      var data = obj.item //获得当前行数据
+              ,layEvent = obj.event; //获得 lay-event 对应的值
+      $(this).attr("href" ,'#/sysd/setd/boaction/EDIT?id='+data.id);
+    });
+
+    treeTable.on('tree(tabset_list2)',function(obj){
+      var data = obj.item //获得当前行数据
+              ,layEvent = obj.event; //获得 lay-event 对应的值
+      $(this).attr("href" ,'#/sysd/setd/boaction/ADD?pcode='+data.id+'&plevels='+data.level);
+    });
+
+    // 监听自定义
+
+    // 全部展开
+    o('.open-all').click(function(){
+      treeTable.openAll(re);
+    })
+    // 全部关闭
+    o('.close-all').click(function(){
+      treeTable.closeAll(re);
+    })
+
+
+  })
 </script>
-<!-- 样式 -->
-<style scoped>
-</style>
+

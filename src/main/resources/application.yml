@@ -1,6 +1,6 @@
 spring:
   messages:
-    encoding: UTF-8  
+    encoding: UTF-8
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
@@ -11,14 +11,14 @@ spring:
       max-file-size: 30Mb
       max-request-size: 30Mb
     encoding:
-       charset: UTF-8
-       enabled: true
-       force: true
-           
+      charset: UTF-8
+      enabled: true
+      force: true
+
   devtools:
     restart:
       enabled: true
-      
+
   freemarker:
     suffix: .html
     template-loader-path: classpath:/templates/
@@ -30,4 +30,6 @@ spring:
     expose-request-attributes: false
     expose-session-attributes: false
     expose-spring-macro-helpers: false
+    settings:
+      number_format: 0.##
   

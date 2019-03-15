@@ -13,10 +13,15 @@
           <form class="layui-form" action="">
           	<input type="hidden" name="ACTIONMODE" value="${ACTIONMODE}">
           	<input type="hidden" name="id" value ="<#if vo ??>${(vo.id?c)!}</#if>" >
-          	<input type="hidden" name="upperId" value ="<#if vo ??>${(vo.upperId?c)!}</#if>" >  
-          	<input type="hidden" name="pid" value ="<#if pid ??>${(pid)}</#if>" >  
-            <div class="layui-form-item">
-              <label class="layui-form-label">菜单名称</label>
+	          <#if ACTIONMODE == 'ADD' >
+		          <input type="hidden" name="upperId" value ="<#if pid ??>${pid}</#if>" >
+		          <input type="hidden" name="levels" value ="<#if plevels ??>${plevels}</#if>" >
+	          <#else>
+		          <input type="hidden" name="upperId" value ="<#if vo ??>${vo.upperId}</#if>" >
+		          <input type="hidden" name="levels" value ="<#if vo ??>${po.levels}</#if>" >
+            </#if>
+	          <div class="layui-form-item">
+              <label class="layui-form-label">菜单名称 </label>
               <div class="layui-input-block">
                 <input type="text" name="name" value ="<#if vo ??>${vo.name}</#if>" required lay-verify="required" placeholder="请输入菜单名称" autocomplete="off" class="layui-input">
               </div>
@@ -49,21 +54,6 @@
                 <input type="text" name="seq" value ="<#if vo ??>${vo.seq}</#if>"  placeholder="" autocomplete="off" class="layui-input">
               </div>
             </div>
-            
-            <#if ACTIONMODE == 'ADD' >
-	            <div class="layui-form-item">
-	              <label class="layui-form-label">菜单级别</label>
-	              <div class="layui-input-block">
-	                <select name="levels" required>
-	                  <#if (plevels == 0)><option value="1" <#if vo ??><#if vo.levels == 1 >selected</#if></#if>>一级</option></#if>
-	                  <#if (plevels < 2) ><option value="2" <#if vo ??><#if vo.levels == 2 >selected</#if></#if>>二级</option></#if>
-	                  <#if (plevels > 1) ><option value="3" <#if vo ??><#if vo.levels == 3 >selected</#if></#if>>三级</option></#if>
-	                </select>
-	              </div>
-	            </div>
-	          <#else>
-	          	<input type="hidden" name="levels" value ="<#if vo ??>${(vo.levels?c)!}</#if>" >
-            </#if>
             
             <div class="layui-form-item">
               <label class="layui-form-label">菜单类型</label>

@@ -35,18 +35,7 @@ public class MenuController extends BaseController implements ICommons{
 	@ActionName(value = "System Menu List") 
 	@RequestMapping("/list")
   public String list(Model model,HttpServletRequest request){		
-    return "sysd/menu/menuset";
-  }
-	
-	@ActionName(value = "System Menu inner List") 
-	@RequestMapping("/list2")
-  public String list2(Model model,HttpServletRequest request){
-		String pid = StringTools.getString(request.getParameter("pid"));
-  	model.addAttribute("pid",pid);
-  	
-  	String plevels = StringTools.getString(request.getParameter("plevels"));
-  	model.addAttribute("plevels",plevels);
-    return "sysd/menu/list2";
+    return "sysd/menu/list";
   }
 
 	@ActionName(value = "Menu edit or add") 
@@ -58,12 +47,14 @@ public class MenuController extends BaseController implements ICommons{
   	model.addAttribute("MENUTYPE",mlist);
   	
   	String pid = StringTools.getString(request.getParameter("pid"));
-  	model.addAttribute("pid",pid);
-  	
   	String plevels = StringTools.getString(request.getParameter("plevels"));
   	if(plevels.equals(""))plevels="0";
-  	model.addAttribute("plevels",Integer.parseInt(plevels));
-  	
+		if(pid.equals(""))pid="0";
+  	model.addAttribute("pid",Integer.parseInt(pid));
+  	if(plevels.equals("0"))model.addAttribute("plevels",1);
+		else if(plevels.equals("1"))model.addAttribute("plevels",2);
+		else if(plevels.equals("2"))model.addAttribute("plevels",3);
+	  else if(plevels.equals("3"))model.addAttribute("plevels",3);
   	//保存或升级操作
 		if(mode.equals(UCMANAGER_ACTION_ADD)){
 			model.addAttribute("SHOWTITLE",UCMANAGER_ACTION_ADDTITLE);
@@ -74,7 +65,6 @@ public class MenuController extends BaseController implements ICommons{
 			model.addAttribute("SHOWTITLE",UCMANAGER_ACTION_EDITTITLE);
 			model.addAttribute("ACTIONMODE",UCMANAGER_ACTION_EDIT);
 			model.addAttribute("vo",sysMenuRepository.getOne(Integer.parseInt(id)));
-			System.out.println("sysMenuRepository.getOne(Integer.parseInt(id))-"+sysMenuRepository.getOne(Integer.parseInt(id)));
 		}
     return "sysd/menu/edit";
   }	

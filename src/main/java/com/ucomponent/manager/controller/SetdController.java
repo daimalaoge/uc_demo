@@ -38,6 +38,14 @@ public class SetdController extends BaseController implements ICommons{
 	@RequestMapping("/boaction/{mode}")
   public String boaction(Model model,HttpServletRequest request,@PathVariable String mode){
   	//设置列表项目数据
+		String pcode = StringTools.getString(request.getParameter("pcode"));
+		String plevels = StringTools.getString(request.getParameter("plevels"));
+		model.addAttribute("pcode", pcode);
+		if(pcode.equals("")) {
+			model.addAttribute("levels", 1);
+		}else{
+			model.addAttribute("levels", Integer.parseInt(plevels) +1);
+		}
 
   	//保存或升级操作
 		if(mode.equals(UCMANAGER_ACTION_ADD)){
@@ -50,7 +58,7 @@ public class SetdController extends BaseController implements ICommons{
 			model.addAttribute("ACTIONMODE",UCMANAGER_ACTION_EDIT);
 			model.addAttribute("vo",sysCodesetRepository.getOne(Integer.parseInt(id)));
 		}
-    return "sysd/menu/edit";
+    return "sysd/setd/edit";
   }	
 }
 

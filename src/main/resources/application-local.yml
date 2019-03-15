@@ -7,19 +7,19 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/uc_main_demo?autoReconnect=true&characterEncoding=UTF-8&allowMultiQueries=true
+    url: jdbc:mysql://139.199.117.78:3306/uc_main_demo?autoReconnect=true&characterEncoding=UTF-8&allowMultiQueries=true
     username: root
-    password: root
+    password: 8sjdlld@s09j__
   jpa:
     show-sql: true
   redis:
     shiro:
-      host: localhost
+      host: 139.199.117.78
       port: 6379
       password: redis
       # 连接超时时间（毫秒）
       timeout: 10000
- 
+
 logging:
   level:
     com.ucomponent : debug
