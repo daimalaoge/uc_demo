@@ -82,16 +82,16 @@
       cols: [
         [ //表头
           {
-            field: 'id',
-            title: 'ID',
+            type: 'numbers',
+            title: 'No.',
             width: 80,
             sort: true,
-            fixed: 'left'
+            fixed: 'left',
           }, {
-            field: 'name',
-            title: '用户名',
-            width: 120
-          }, {
+          field: 'name',
+          title: '用户名',
+          width: 120
+        }, {
             field: 'codesetSex',
             title: '性别',
             width: 80,
@@ -162,7 +162,7 @@
 	    ,layEvent = obj.event; //获得 lay-event 对应的值
 	    if(layEvent === 'status'){
 	      layer.confirm('将要设置本数据状态吗？', function(index){   
-	        $.post('/demo/bo/status', "id="+data.id, function (res) {			      
+	        $.post('/demo/bo/status', "encCode="+data.encCode, function (res) {
 			      layer.msg("设置成功",{time:1*1000},function(){	
 			      	location.reload(); // 页面刷新	
 			    	})
@@ -170,17 +170,20 @@
 				});
 	    } else if(layEvent === 'del'){
 	      layer.confirm('请确定删除（本操作不可恢复）', function(index){   
-	        $.post('/demo/bo/del', "id="+data.id, function (res) {			      
+	        $.post('/demo/bo/del', "encCode="+data.encCode, function (res) {
 			      layer.msg("删除成功",{time:1*1000},function(){	
 			      	location.reload(); // 页面刷新	
 			    	})
 					}, 'json');
 				});
 	    } else if(layEvent === 'edit'){  	
-	    	$(this).attr("href" ,'#/demo/boaction/EDIT?id='+data.id);
+	    	$(this).attr("href" ,'#/demo/boaction/EDIT?encCode='+data.encCode);
 	    }
 	  });
   });
+</script>
+<script type="text/html" id="LAY_UI_TABLE_NO">
+  {{d.LAY_TABLE_INDEX+1}}
 </script>
 <!-- 样式 -->
 <style scoped>

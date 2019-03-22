@@ -10,6 +10,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ucomponent.base.encrypt.EncryptPO;
 import com.ucomponent.base.entity.CodeSetList;
 
 /**
@@ -19,8 +20,8 @@ import com.ucomponent.base.entity.CodeSetList;
  * @Descpt:
  */
 public class ControllerTools {
-	public List<Object> codeKeyConvert(List<Object> jsonlist){
-		List<Object> list = new ArrayList<Object>();
+	public List<BaseLayuiVO> codeKeyConvert(List<BaseLayuiVO> jsonlist){
+		List<BaseLayuiVO> list = new ArrayList<BaseLayuiVO>();
 		try {
 			list = deepCopy(jsonlist);
 		} catch (ClassNotFoundException e1) {
@@ -58,6 +59,7 @@ public class ControllerTools {
 	      }  
 	    }
 	  }
+		list = EncryptPO.encList(list);
 	  return list;
 	}
 	

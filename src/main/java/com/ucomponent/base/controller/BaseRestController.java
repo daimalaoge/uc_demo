@@ -59,7 +59,7 @@ public class BaseRestController implements ICommons{
 	 * @param json
 	 * @return
 	 */
-	public List<Object> codeKeyConvert(List<Object> jsonlist){
+	public List<BaseLayuiVO> codeKeyConvert(List<BaseLayuiVO> jsonlist){
 		
 	  return new ControllerTools().codeKeyConvert(jsonlist);
 	}
