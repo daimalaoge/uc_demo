@@ -51,7 +51,7 @@ public class DemoController extends BaseController implements ICommons{
 			model.addAttribute("ACTIONMODE",UCMANAGER_ACTION_ADD);
 			model.addAttribute("vo",new Demo());
 		}else if(mode.equals(UCMANAGER_ACTION_EDIT)){
-		  String id = StringTools.getString(request.getParameter("id"));
+		  String id = StringTools.getDecHStr(request.getParameter("encCode"));
 			model.addAttribute("SHOWTITLE",UCMANAGER_ACTION_EDITTITLE);
 			model.addAttribute("ACTIONMODE",UCMANAGER_ACTION_EDIT);
 			model.addAttribute("vo",demoRepository.getOne(Integer.parseInt(id)));

@@ -2,6 +2,7 @@ package com.ucomponent.manager.controller.rest;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.ucomponent.base.encrypt.EncryptPO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -44,35 +45,44 @@ public class RestDemoController extends BaseRestController implements ICommons{
     //返回页面数据
     jd.setCode(UCMANAGER_LISTPAGE_CODE);
     jd.setCount(pagedata.getTotalElements());
-    jd.setData(super.codeKeyConvert(pagedata.getContent()));
+    jd.setData(super.codeKeyConvert( pagedata.getContent()));
     return jd;
   }
   
   @ActionName(value = "Demo save")
   @RequestMapping("/bo/save")
   public String bosave(HttpServletRequest request,Demo vo){
-  	super.doSave(vo, request);
-		demoRepository.save(vo);
+	  Demo po =(Demo)EncryptPO.decPO(vo);
+  	super.doSave(po, request);
+		demoRepository.save(po);
   	return UCMANAGER_DATA_SUCCUSS;
   }
   
   @ActionName(value = "Demo del")
   @RequestMapping("/bo/del")
   public String bodel(HttpServletRequest request){
-  	String id = StringTools.getString(request.getParameter("id"));
-		Demo demo = demoRepository.getOne(Integer.parseInt(id));	
-		super.doDelete(demo,request);
-		demoRepository.save(demo);
-  	return UCMANAGER_DATA_SUCCUSS;
+	  if(!StringTools.getDecHStr(request.getParameter("encCode")).equals("")) {
+		  String id = StringTools.getDecHStr(request.getParameter("encCode"));
+		  Demo demo = demoRepository.getOne(Integer.parseInt(id));
+		  super.doDelete(demo, request);
+		  demoRepository.save(demo);
+		  return UCMANAGER_DATA_SUCCUSS;
+	  }else{
+		  return UCMANAGER_DATA_ERROR;
+	  }
   }
   
   @ActionName(value = "Demo status")
   @RequestMapping("/bo/status")
   public String bostatus(HttpServletRequest request){
-  	String id = StringTools.getString(request.getParameter("id"));
-		Demo demo = demoRepository.getOne(Integer.parseInt(id));
-		super.doStatus(demo,request);
-		demoRepository.save(demo);
-  	return UCMANAGER_DATA_SUCCUSS;
+	  if(!StringTools.getDecHStr(request.getParameter("encCode")).equals("")) {
+	    String id = StringTools.getDecHStr(request.getParameter("encCode"));
+			Demo demo = demoRepository.getOne(Integer.parseInt(id));
+			super.doStatus(demo,request);
+			demoRepository.save(demo);
+	    return UCMANAGER_DATA_SUCCUSS;
+	  }else{
+		  return UCMANAGER_DATA_ERROR;
+	  }
   }
 }
