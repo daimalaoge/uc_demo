@@ -53,6 +53,7 @@ public class RestDemoController extends BaseRestController implements ICommons{
   @RequestMapping("/bo/save")
   public String bosave(HttpServletRequest request,Demo vo){
 	  Demo po =(Demo)EncryptPO.decPO(vo);
+	  System.out.println("demo is :"+po);
   	super.doSave(po, request);
 		demoRepository.save(po);
   	return UCMANAGER_DATA_SUCCUSS;

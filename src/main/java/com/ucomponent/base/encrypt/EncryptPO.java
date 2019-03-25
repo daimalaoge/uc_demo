@@ -14,7 +14,7 @@ public class EncryptPO {
 	public static BaseLayuiVO encPO(BaseLayuiVO bo){
 		try {
 			Method method = bo.getClass().getMethod("getId", null);
-			long l =(Long)method.invoke(bo, null);
+			int l =(Integer)method.invoke(bo, null);
 			Method pmethod = bo.getClass().getMethod("setEncCode", String.class);
 			pmethod.invoke(bo, new EncryptStringGen().encrypt(String.valueOf(l)));
 
@@ -36,8 +36,8 @@ public class EncryptPO {
 		try {
 			Method method = bo.getClass().getMethod("getEncCode", null);
 			String l =(String)method.invoke(bo, null);
-			Method pmethod = bo.getClass().getMethod("setId", long.class);
-			pmethod.invoke(bo, Long.parseLong(new EncryptStringGen().decrypt(l)));
+			Method pmethod = bo.getClass().getMethod("setId", int.class);
+			pmethod.invoke(bo, Integer.parseInt(new EncryptStringGen().decrypt(l)));
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -56,7 +56,7 @@ public class EncryptPO {
 	public static BaseLayuiVO encPO(BaseLayuiVO bo,String mod){
 		try {
 			Method method = bo.getClass().getMethod("get" +mod, null);
-			long l =(Long)method.invoke(bo, null);
+			int l =(Integer)method.invoke(bo, null);
 			Method pmethod = bo.getClass().getMethod("setEncCode", String.class);
 			pmethod.invoke(bo, new EncryptStringGen().encrypt(String.valueOf(l)));
 
@@ -100,7 +100,7 @@ public class EncryptPO {
 	public static BaseLayuiVO encPOKey(BaseLayuiVO bo,String mod,String key){
 		try {
 			Method method = bo.getClass().getMethod("get" +mod, null);
-			long l =(Long)method.invoke(bo, null);
+			int l =(Integer)method.invoke(bo, null);
 			Method pmethod = bo.getClass().getMethod("setEncCode", String.class);
 			pmethod.invoke(bo, new EncryptStringGen(key).encrypt(String.valueOf(l)));
 
@@ -191,7 +191,7 @@ public class EncryptPO {
 		try {
 			for(BaseLayuiVO bo:list){
 				Method method = bo.getClass().getMethod("getId", null);
-				long l =(Long)method.invoke(bo, null);
+				int l =(Integer)method.invoke(bo, null);
 				Method pmethod = bo.getClass().getMethod("setEncCode", String.class);
 				pmethod.invoke(bo, new EncryptStringGen(key).encrypt(String.valueOf(l)));
 			}

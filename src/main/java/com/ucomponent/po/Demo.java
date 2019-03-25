@@ -25,7 +25,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "ucm_demo") 
-public class Demo extends BasePO implements Serializable{
+public class Demo extends BasePO {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;

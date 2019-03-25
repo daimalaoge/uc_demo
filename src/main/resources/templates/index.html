@@ -100,13 +100,13 @@
 									<!-- M2 -->
 									<#list menulist as mlist2>
 										<#if mlist2.upperId = mlist1.id && mlist2.codesetMenutype = 'MENU_TYPE_PAGE'>
-								
+
 											<li class="kit-menu-item" >
 												<a href="javascript:;" class="child">
 													<i class="layui-icon"></i>
 													<span>${mlist2.name}</span>
 												</a>
-												
+
 												<!-- M3 -->
 												<ul class="kit-menu-child kit-menu-child layui-anim layui-anim-upbit">
 													<#list menulist as mlist3>
@@ -119,8 +119,8 @@
 															</li>
 														</#if>
 													</#list>
-												</ul>		
-												<!-- M3 END -->											
+												</ul>
+												<!-- M3 END -->
 											</li>
 										</#if>
 									</#list>

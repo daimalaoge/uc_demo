@@ -20,4 +20,5 @@ import com.ucomponent.po.Demo;
 public abstract interface DemoRepository extends JpaRepository<Demo, Integer>{
 	public abstract Page<Demo> findByNameContainingAndCodesetGstatusIn(String name,String status,Pageable pageable);
 
+	public abstract List<Demo> findByIdOrderByCreateDatetime(int id);
 }

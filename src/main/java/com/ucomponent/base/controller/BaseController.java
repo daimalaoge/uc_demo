@@ -10,7 +10,7 @@ import java.util.List;
  * Descp:
 **/
 public class BaseController {
-	public List<Object> codeKeyConvert(List<Object> jsonlist){
+	public List<BaseLayuiVO> codeKeyConvert(List<BaseLayuiVO> jsonlist){
 		
 	  return new ControllerTools().codeKeyConvert(jsonlist);
 	}

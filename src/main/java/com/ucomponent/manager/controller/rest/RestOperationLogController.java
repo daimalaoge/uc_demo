@@ -71,13 +71,13 @@ public class RestOperationLogController extends BaseRestController implements IC
     //获取列表数据    
     Sort sort = new Sort(Sort.Direction.DESC,"createDatetime"); //创建时间降序排序
     Pageable pageable = new PageRequest(super.getPage(request),super.getPageLimit(request),sort);
-    Page pagedata = sysOperationLogRepository.findByUserIdContainingAndTitleContainingAndCreateDatetimeBetween(userid, title, ds, de, pageable);
-    //返回页面数据
-    System.out.println("super.codeKeyConvert(pagedata.getContent())-"+super.codeKeyConvert(pagedata.getContent()));
-    jd.setCode(UCMANAGER_LISTPAGE_CODE);
-    jd.setCount(pagedata.getTotalElements());
-    jd.setData(super.codeKeyConvert(pagedata.getContent()));
-    return jd;
+		Page pagedata = sysOperationLogRepository.findByUserIdContainingAndTitleContainingAndCreateDatetimeBetween(userid, title, ds, de, pageable);
+		//返回页面数据
+		System.out.println("super.codeKeyConvert(pagedata.getContent())-"+super.codeKeyConvert(pagedata.getContent()));
+		jd.setCode(UCMANAGER_LISTPAGE_CODE);
+		jd.setCount(pagedata.getTotalElements());
+		jd.setData(super.codeKeyConvert(pagedata.getContent()));
+		return jd;
   }
 }
 

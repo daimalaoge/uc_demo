@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.ucomponent.base.encrypt.EncryptPO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,8 +35,9 @@ public class DemoController extends BaseController implements ICommons{
   
   @ActionName(value = "Demo List") 
 	@RequestMapping("/list")
-  public String list(Model model,HttpServletRequest request){		
-    return "demo/list";
+  public String list(Model model,HttpServletRequest request){
+	  System.out.println("-----------+++++++++++++++++++");
+  	return "demo/list";
   }
 	
   @ActionName(value = "Demo edit or add") 
@@ -54,7 +56,9 @@ public class DemoController extends BaseController implements ICommons{
 		  String id = StringTools.getDecHStr(request.getParameter("encCode"));
 			model.addAttribute("SHOWTITLE",UCMANAGER_ACTION_EDITTITLE);
 			model.addAttribute("ACTIONMODE",UCMANAGER_ACTION_EDIT);
-			model.addAttribute("vo",demoRepository.getOne(Integer.parseInt(id)));
+
+			model.addAttribute("vo", EncryptPO.encPO(demoRepository.getOne(Integer.parseInt(id))));
+			model.addAttribute("encCode",EncryptPO.encPO(demoRepository.getOne(Integer.parseInt(id))).getEncCode());
 		}
     return "demo/edit";
   }	
