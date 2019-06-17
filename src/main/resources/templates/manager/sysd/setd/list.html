@@ -1,0 +1,178 @@
+<div>
+  <form class="layui-form" action="">
+    <div class="layui-form-item">
+      <div class="layui-input-block">
+        <a class="layui-btn " lay-filter="LAY-table-sysdsetdlist-sure-btn" target="_top" href="#/manager/sysd/setd/boaction/ADD" <#assign var=checkRole("/manager/sysd/setd/boaction/ADD") />${var}>新增一级</a>
+        <button type="button" class="layui-btn  open-all">全部展开</button>
+        <button type="button" class="layui-btn  close-all">全部关闭</button>
+      </div>
+    </div>
+
+    <div  class="layui-form layui-border-box layui-table-view"  >
+      <div class="layui-table-box">
+        <div class="layui-table-body layui-table-main" style="overflow:scroll;float: bottom;width: 100%;height: window.outerHeight - window.innerHeight;">
+          <table class="layui-table layui-form" id="LAY-table-sysdsetdlist-TABLEDOM" lay-size="sm" style="width: 3100px"></table>
+        </div>
+
+        <#--<div class="layui-table-fixed layui-table-fixed-l" style="height: window.outerHeight - window.innerHeight;">-->
+          <#--<table class="layui-table layui-form" id="LAY-table-sysdsetdlist-TABLEDOM2" lay-size="sm" style="width: 750px"></table>-->
+        <#--</div>-->
+      </div>
+    </div>
+
+  </form>
+</div>
+<script type="text/javascript">
+
+	layui.use(['layer', 'code', 'form','treeTable'], function () {
+		var $ = layui.jquery,
+				o = layui.$,
+				form = layui.form,
+				layer = layui.layer,
+				treeTable = layui.treeTable;
+
+		var re = treeTable.render({
+			elem: '#LAY-table-sysdsetdlist-TABLEDOM',
+			url: '/manager/sysd/setd/list/data/',
+
+			is_checkbox: false,
+			icon_key: 'name',
+			primary_key: 'codeKey',
+			parent_key: 'upperCode',
+			cellMinWidth: 80,
+			end: function (e) {
+				form.render();
+				$('.layui-table-body').css("height", window.innerHeight-200);
+			},
+			cols: [
+				{
+					key: 'name',
+					title: '名称',
+					width: '350px',
+					align: 'left',
+				}, {
+					title: '操作',
+					align: 'center',
+					style: 'position: absolute;right: -49px;top: 0;height: 100%;width: 50px',
+					width: '200px',
+					template: function (item) {
+						return '<a class="layui-btn layui-btn-xs" lay-filter="LAY-table-sysdsetdlist-tabset_status" <#assign var=checkRole("/manager/sysd/setd/bo/status") />${var} >设置状态</a>' +
+								'<a href="javascript:;" class="layui-btn layui-btn-xs" lay-filter="LAY-table-sysdsetdlist-tabset_edit" <#assign var=checkRole("/manager/sysd/setd/boaction/EDIT") />${var} >编辑</a>' +
+								'<a href="javascript:;" class="layui-btn layui-btn-xs" lay-filter="LAY-table-sysdsetdlist-tabset_list2" <#assign var=checkRole("/manager/sysd/setd/boaction/ADD") />${var} >下级</a>';
+					},
+				},
+				{
+					key: 'codeKey',
+					title: 'codeKey',
+					width: '200px',
+					align: 'left',
+				}, {
+					key: 'seq',
+					title: '次序',
+					width: '50px',
+					align: 'center',
+				}, {
+					key: 'descp',
+					title: '说明',
+					width: '200px',
+					align: 'left',
+				}, {
+					key: 'codesetGstatus',
+					title: '状态',
+					width: '100px',
+					align: 'center',
+				}, {
+					key: 'attrValue1',
+					title: 'attrValue1',
+					align: 'left',
+					width: '200px',
+				}, {
+					key: 'attrValue2',
+					title: 'attrValue2',
+					align: 'left',
+					width: '200px',
+				}, {
+					key: 'attrValue3',
+					title: 'attrValue3',
+					align: 'left',
+					width: '200px',
+				}, {
+					key: 'attrValue4',
+					title: 'attrValue4',
+					align: 'left',
+					width: '200px',
+				}, {
+					key: 'attrValue5',
+					title: 'attrValue5',
+					align: 'left',
+					width: '200px',
+				}, {
+					key: 'attrValue6',
+					title: 'attrValue6',
+					align: 'left',
+					width: '200px',
+				}, {
+					key: 'attrValue7',
+					title: 'attrValue7',
+					align: 'left',
+					width: '200px',
+				}, {
+					key: 'attrValue8',
+					title: 'attrValue8',
+					align: 'left',
+					width: '200px',
+				}, {
+					key: 'attrValue9',
+					title: 'attrValue9',
+					align: 'left',
+					width: '200px',
+				}, {
+					key: 'attrValue10',
+					title: 'attrValue10',
+					align: 'left',
+					width: '200px',
+				}
+			]
+		});
+
+		window.treetblrand = function(){
+			treeTable.render(re);
+		}
+
+		treeTable.on('tree(LAY-table-sysdsetdlist-tabset_status)', function (obj) {
+			var data = obj.item //获得当前行数据
+					, layEvent = obj.event; //获得 lay-event 对应的值
+			layer.confirm('将要设置本数据状态吗？', function (index) {
+				$.post('/manager/sysd/setd/bo/status', "encCode=" + data.encCode, function (res) {
+					layer.msg("设置成功", {time: 1 * 1000}, function () {
+						//location.reload(); // 页面刷新
+						treeTable.render(re);
+					})
+				}, 'json');
+			});
+		});
+
+		treeTable.on('tree(LAY-table-sysdsetdlist-tabset_edit)', function (obj) {
+			var data = obj.item //获得当前行数据
+					, layEvent = obj.event; //获得 lay-event 对应的值
+			$(this).attr("href", '#/manager/sysd/setd/boaction/EDIT?encCode=' + data.encCode);
+		});
+
+		treeTable.on('tree(LAY-table-sysdsetdlist-tabset_list2)', function (obj) {
+			var data = obj.item //获得当前行数据
+					, layEvent = obj.event; //获得 lay-event 对应的值
+			$(this).attr("href", '#/manager/sysd/setd/boaction/ADD?pcode=' + data.codeKey + '&plevels=' + data.level);
+		});
+
+    // 全部展开
+		o('.open-all').click(function(){
+			treeTable.openAll(re);
+		})
+		// 全部关闭
+		o('.close-all').click(function(){
+			treeTable.closeAll(re);
+		})
+
+	})
+</script>
+

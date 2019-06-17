@@ -1,0 +1,81 @@
+<div class="layui-fluid">
+  <div class="layui-row">
+    <div class="layui-col-xs12">
+      <div class="layui-card">
+        <div class="layui-card-header">
+          <a href="#/manager/sysd/role/list" title="返回列表" <#assign var=checkRole("/manager/sysd/role/list") />${var}>
+            <i class="layui-icon">&#xe65c;</i>
+          </a>
+          <span>${SHOWTITLE}</span>
+          
+        </div>
+        <div class="layui-card-body">
+          <form class="layui-form" action="">
+          	<input type="hidden" name="ACTIONMODE" value="${ACTIONMODE}">
+          	<input type="hidden" name="id" value ="<#if vo ??>${vo.id}</#if>" >          	
+            <div class="layui-form-item">
+              <label class="layui-form-label">权限名称</label>
+              <div class="layui-input-block">
+                <input type="text" name="name" value ="<#if vo ??>${vo.name}</#if>" required lay-verify="required" placeholder="请输入权限名称" autocomplete="off" class="layui-input">
+              </div>
+            </div>
+
+            <div class="layui-form-item layui-form-text">
+              <label class="layui-form-label">备注</label>
+              <div class="layui-input-block">
+                <textarea name="descp" placeholder="请输入内容" class="layui-textarea"><#if vo ??>${vo.remarks}</#if></textarea>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="LAY-table-sysdroleedit-form_hash"  <#assign var=checkRole("/manager/sysd/role/boaction/ADD") />${var}>立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  layui.use(['table','jquery','form'], function () {  	
+  	var $ = layui.jquery,
+    form = layui.form;
+    form.render();
+    //监听提交
+    form.on('submit(LAY-table-sysdroleedit-form_hash)', function (data) {
+      $.post('/manager/sysd/role/bo/save', data.field, function (res) {
+			  if (res==1) {
+		      layer.open({
+		        type: 1
+		        ,title: '操作成功' 
+		        ,closeBtn: false
+		        ,area: '300px;'
+		        ,shade: 0.8
+		        ,id: 'VO_ACTION' //设定一个id，防止重复弹出
+		        ,btn: ['确定']
+		        ,btnAlign: 'c'
+		        ,moveType: 1 //拖拽模式，0或者1
+		        ,yes: function(index){
+        			layer.close(index);
+				      parent.layui.table.reload("LAY-table-sysdrolelist-DATA_LIST"); // 页面刷新
+        			//showToast();
+        			
+    				},
+    				btn2: function(){
+
+    				}
+		      });
+				}else{
+					layer.msg("操作失败，请稍后重试", {time: 2000});
+				}
+			}, 'json');
+      return false;
+    });
+  });
+
+</script>
+<style>
+</style>

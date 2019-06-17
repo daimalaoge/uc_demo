@@ -1,0 +1,108 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Union Component Main - POP</title>
+  <!-- build:css -->
+  <link rel="stylesheet" href="/kitadmin/css/layui.css">
+  <link rel="stylesheet" href="/kitadmin/css/kitadmin.css" id="theme">
+  <link rel="stylesheet" href="/kitadmin/css/nprogress.css">
+  <!-- endbuild -->
+  <style>
+    .layui-form-select dl { max-height:200px; }
+  </style>
+</head>
+
+<body >
+<!-- 模板 -->
+<table class="layui-hide" id="LAY-table-sysdaccountroleset-DATA_LIST" lay-filter="LAY-table-sysdaccountroleset-DATA_LIST"></table>
+
+<script type="text/html" id="LAY-table-sysdaccountroleset-toolbar">
+  <div class="layui-btn-container">
+    <button class="layui-btn" lay-submit lay-event="sure-btn" <#assign var=checkRole("/manager/sysd/account/roleset") />${var}>确认</button>
+    <button class="layui-btn layui-btn-primary" onclick="parent.layer.close(parent.layer.getFrameIndex(window.name));" lay-filter="form_cancel" >关闭</button>
+  </div>
+</script>
+</body>
+<script src="/kitadmin/layui.js"></script>
+<script src="/kitadmin/kitadmin.js"></script>
+<!-- 脚本 -->
+<script>
+  layui.use(['jquery', 'table'], function () {
+    var $ = layui.jquery,
+      layer = layui.layer,
+      table = layui.table
+    //第一个实例
+    table.render({
+      method: 'post',
+      // size: 'sm',
+      limit: 20,
+      elem: '#LAY-table-sysdaccountroleset-DATA_LIST',
+      height: 'full-235',
+      url: '/manager/sysd/account/roleset/data/?uid=${uid}', //数据接口
+      toolbar: '#LAY-table-sysdaccountroleset-toolbar',
+      page: false, //开启分页
+      cols: [
+        [ //表头
+        	{checkbox: true, fixed: true},
+          {
+            type: 'numbers',
+            title: 'No.',
+            width: 80,
+            sort: true,
+            fixed: 'center',
+          }, {
+            field: 'name',
+            title: '权限名称',
+            width: 120
+          }, {
+            field: 'remarks',
+          title: '备注',
+          width: 200
+          }
+        ]
+      ]
+    });
+    table.on('toolbar(LAY-table-sysdaccountroleset-DATA_LIST)', function(obj){
+	    var checkStatus = table.checkStatus(obj.config.id);
+	    switch(obj.event){
+	      case 'sure-btn':
+	        var data = checkStatus.data;
+	        var text = [];
+	        $.each(data,function(i,t){
+	        	text.push(t.encCode);
+          })
+	        $.post('/manager/sysd/account/roleset/save', 'uid=${uid}&treedate='+text, function (res) {
+
+					  if (res==1) {
+						  parent.layer.open({
+							  type: 1
+							  ,title: '操作成功'
+							  ,closeBtn: false
+							  ,area: '300px;'
+							  ,shade: 0.8
+							  ,id: 'VO_ACTION' //设定一个id，防止重复弹出
+							  ,btn: ['确定']
+							  ,btnAlign: 'c'
+							  ,moveType: 1 //拖拽模式，0或者1
+							  ,yes: function(index){
+								  parent.layer.close(index);
+								  var index = parent.layer.getFrameIndex(window.name);
+								  parent.layer.close(index);
+							  },
+						  });
+						}else{
+							layer.msg("操作失败，请稍后重试", {time: 2000});
+						}
+					}, 'json');
+		      return false;
+	      break;
+
+	    };
+    });
+
+  });
+</script>
+<!-- 样式 -->
+<style scoped>
+</style>

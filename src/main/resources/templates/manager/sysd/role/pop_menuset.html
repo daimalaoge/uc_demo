@@ -1,0 +1,179 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>Union Component Main - POP</title>
+	<!-- build:css -->
+	<link rel="stylesheet" href="/kitadmin/css/layui.css">
+	<link rel="stylesheet" href="/kitadmin/css/kitadmin.css" id="theme">
+	<link rel="stylesheet" href="/kitadmin/css/nprogress.css">
+	<!-- endbuild -->
+	<style>
+		.layui-form-select dl { max-height:200px; }
+	</style>
+</head>
+
+<body >
+<div class="layui-fluid">
+		<div class="layui-form-item">
+	    <div class="layui-input-block">
+				<button class="layui-btn" onclick="sure(this)" <#assign var=checkRole("/manager/sysd/role/menuset") />${var} >确认</button>
+	      <button type="button" class="layui-btn  open-all">全部展开</button>
+				<button type="button" class="layui-btn  close-all">全部关闭</button>
+				<button class="layui-btn layui-btn-primary" onclick="parent.layer.close(parent.layer.getFrameIndex(window.name));" lay-filter="form_cancel" >关闭</button>
+
+			</div>
+	  </div>
+	  <div>
+			<table class="layui-table layui-form" id="LAY-table-sysdrolemenuset-TABLEDOM" lay-size="sm" ></table>
+		</div>
+
+</div>
+
+</body>
+
+<script src="/kitadmin/layui.js"></script>
+<script src="/kitadmin/kitadmin.js"></script>
+		
+<script type="text/javascript">
+	layui.use(['treeTable','layer','code','form'],function(){
+		var $ = layui.jquery,
+			o = layui.$,
+			form = layui.form,
+			layer = layui.layer,
+			treeTable = layui.treeTable;
+		// 直接下载后url: './data/table-tree.json',这个配置可能看不到数据，改为data:[],获取自己的实际链接返回json数组
+		var	re = treeTable.render({
+			elem: '#LAY-table-sysdrolemenuset-TABLEDOM',
+			url: '/manager/sysd/role/menuset/data/',
+						
+			is_checkbox: true,
+			icon_key: 'name',
+			primary_key: 'id',
+			parent_key: 'upperId',
+			checked: {
+				key: 'id',
+				data: [${mr_rsdata}],
+			},
+			end: function(e){
+				form.render();
+			},
+			cols: [
+				{
+					key: 'name',
+					title: '名称',
+					width: '300px',
+					template: function(item){
+						if(item.levels == 1){
+							return '<span style="color:red;">'+item.name+'</span>';
+						}else if(item.levels == 2){
+							return '<span style="color:green;">'+item.name+'</span>';
+						}else if(item.levels == 3){
+							return '<span style="color:#aaa;">'+item.name+'</span>';
+						}
+					},
+				},{
+					key: 'codesetMenutype',
+					title: '菜单类型',
+					width: '150px',
+					align: 'left',
+				},{
+					key: 'remarks',
+					title: '备注',
+					width: '250px',
+					align: 'left',
+				}						
+			]
+		});
+		
+		// 监听checkbox选择
+		treeTable.on('tree(box)',function(data){
+			if(o(data.elem).parents('#LAY-table-sysdrolemenuset-TABLEDOM').length){
+				var text = [];
+				o(data.elem).parents('#LAY-table-sysdrolemenuset-TABLEDOM').find('.cbx.layui-form-checked').each(function(){
+					o(this).parents('[data-pid]').length && text.push(o(this).parents('td').next().find('span').text());
+				})
+				o(data.elem).parents('#LAY-table-sysdrolemenuset-TABLEDOM').prev().find('input').val(text.join(','));
+			}
+			//console.log(JSON.stringify(data));
+		})
+		// 监听自定义
+		// 获取选中值，返回值是一个数组（定义的primary_key参数集合）
+		o('.get-checked').click(function(){
+			layer.msg('选中参数'+treeTable.checked(re).join(','))
+		})
+		// 全部展开
+		o('.open-all').click(function(){
+			treeTable.openAll(re);
+		})
+		// 全部关闭
+		o('.close-all').click(function(){
+			treeTable.closeAll(re);
+		})
+		<#--//确认-->
+		<#--o('.sure-btn').click(function(data){-->
+			<#--var text = [];-->
+<#--      $(".layui-form-checked").each(function(){-->
+				<#--var d = o(this).parents('tr').data();-->
+				<#--text.push(d.id);-->
+      <#--});-->
+
+			<#--$.post('/manager/sysd/role/menuset/save', 'rid=${rid}&treedate='+text, function (res) {-->
+			  <#--if (res==1) {-->
+		      <#--layer.open({-->
+		        <#--type: 1-->
+		        <#--,title: '操作成功' -->
+		        <#--,closeBtn: false-->
+		        <#--,area: '300px;'-->
+		        <#--,shade: 0.8-->
+		        <#--,id: 'VO_ACTION' //设定一个id，防止重复弹出-->
+		        <#--,btn: ['确定']-->
+		        <#--,btnAlign: 'c'-->
+		        <#--,moveType: 1 //拖拽模式，0或者1-->
+		        <#--,yes: function(index){-->
+        			<#--layer.close(index);         			-->
+    				<#--},-->
+		      <#--});-->
+				<#--}else{-->
+					<#--layer.msg("操作失败，请稍后重试", {time: 2000});-->
+				<#--}-->
+			<#--}, 'json');-->
+      <#--return false;-->
+		<#--})-->
+
+		window.sure = function (data){
+			var text = [];
+			$(".layui-form-checked").each(function(){
+				var d = o(this).parents('tr').data();
+				text.push(d.id);
+			});
+			$.post('/manager/sysd/role/menuset/save', 'rid=${rid}&treedate='+text, function (res) {
+
+				if (res=='1') {
+					parent.layer.open({
+						type: 1
+						,title: '操作成功'
+						,closeBtn: false
+						,area: '300px;'
+						,shade: 0.8
+						,id: 'VO_ACTION' //设定一个id，防止重复弹出
+						,btn: ['确定']
+						,btnAlign: 'c'
+						,moveType: 1 //拖拽模式，0或者1
+						,yes: function(index){
+							parent.layer.close(index);
+							var index = parent.layer.getFrameIndex(window.name);
+							parent.layer.close(index);
+						},
+					});
+
+				}else{
+					layer.msg("操作失败，请稍后重试", {time: 2000});
+				}
+			}, 'json');
+
+		};
+
+	})
+</script>
+

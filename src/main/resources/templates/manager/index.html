@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>Union Component Main - DEMO</title>
+	<!-- build:css -->
+	<link rel="stylesheet" href="/kitadmin/css/layui.css">
+	<link rel="stylesheet" href="/kitadmin/css/layer.css">
+	<link rel="stylesheet" href="/kitadmin/css/template.css">
+	<link rel="stylesheet" href="/kitadmin/css/kitadmin.css" id="theme">
+	<link rel="stylesheet" href="/kitadmin/css/nprogress.css">
+	<!-- endbuild -->
+</head>
+
+<body class="layui-layout-body">
+	<div class="layui-layout layui-layout-admin">
+		<!-- header -->
+		<div class="layui-header">
+			<div class="layui-logo">
+				<div class="layui-logo-toggle" kit-toggle="side" data-toggle="on">
+					<i class="layui-icon">&#xe65a;</i>
+				</div>
+				<div class="layui-logo-brand">
+					<a href="#/">UC Demo</a>
+				</div>
+			</div>
+			<div class="layui-layout-left">
+
+			</div>
+			<div class="layui-layout-right">
+				<ul class="kit-nav" lay-filter="header_right">
+					<li class="kit-item">
+						<a href="javascript:;">
+							<span>
+								<img src="\images\template\def\my.png" class="layui-nav-img">${user.loginName}
+							</span>
+						</a>
+						<ul class="kit-nav-child kit-nav-right">
+							<li class="kit-item">
+								<a href="#/manager/user/my/password">
+									<i class="layui-icon">&#xe612;</i>
+									<span>更改密码</span>
+								</a>
+							</li>
+							<li class="kit-item" kit-target="setting">
+								<a href="javascript:;" data="setting">
+									<i class="layui-icon">&#xe614;</i>
+									<span>设置</span>
+								</a>
+							</li>
+							<li class="kit-nav-line"></li>
+							<li class="kit-item">
+								<a href="logout" >
+									<i class="layui-icon">&#x1006;</i>
+									<span>注销</span>
+								</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- silds -->
+		<!--侧边导航栏-->
+		<div class="layui-side" kit-side="true">
+			<div class="layui-side-scroll">
+				<div id="menu-box">
+					<ul class="kit-menu">
+					<!-- M1 -->
+						<#if menulist??>
+							<#list menulist as mlist1>
+								<#if mlist1.levels = 1 && mlist1.codesetMenutype = 'MENU_TYPE_MENU'>
+									<li class="kit-menu-item">
+										<a href="javascript:;" class="child">
+											<i class="layui-icon"></i>
+											<span>${mlist1.name}</span>
+										</a>
+										<ul class="kit-menu-child kit-menu-child layui-anim layui-anim-upbit">
+											<a href="#/manager/main" data="/manager/main" name="首页" class=" hide"></a>
+											<a href="#/manager/user/my/password" data="/manager/user/my/password" name="更改密码" class=" hide"></a>
+											<!-- M2 -->
+											<#list menulist as mlist2>
+												<#if mlist2.upperId = mlist1.id && mlist2.codesetMenutype = 'MENU_TYPE_MENU'>
+
+													<li class="kit-menu-item" >
+														<a href="javascript:;" class="child">
+															<i class="layui-icon"></i>
+															<span>${mlist2.name}</span>
+														</a>
+
+														<!-- M3 -->
+														<ul class="kit-menu-child kit-menu-child layui-anim layui-anim-upbit">
+															<#list menulist as mlist3>
+																<#if mlist3.upperId = mlist2.id && mlist3.codesetMenutype = 'MENU_TYPE_MENU'>
+																	<li class="kit-menu-item">
+																		<a href="${mlist3.url}" data="${mlist3.urlData}" name="${mlist3.name}" >
+																			<i class="layui-icon"></i>
+																			<span>${mlist3.name}</span>
+																		</a>
+																	</li>
+																</#if>
+															</#list>
+														</ul>
+														<!-- M3 END -->
+													</li>
+												</#if>
+											</#list>
+											<!-- M2 END -->
+										</ul>
+									</li>
+								</#if>
+							</#list>
+						</#if>
+					<!-- M1 END-->
+					<!-- Hidden -->
+					<li style="display:none!important;"> 
+						<#list menulist as mlist>
+							<#if mlist.codesetMenutype = 'MENU_TYPE_PAGE'>
+								<a href="${mlist.url}" data="${mlist.urlData}" name="${mlist.name}" class=" hide"></a> 
+							</#if>
+						</#list>
+					</li> 
+					<!-- Hidden END-->
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- main -->
+		<div class="layui-body" kit-body="true">
+			<router-view></router-view>
+		</div>
+		<!-- footer -->
+		<div class="layui-footer" kit-footer="true">
+			2019 © Union Component  MIT license		
+		</div>
+	</div>
+	<!-- build:js -->
+	<script src="/kitadmin/polyfill.min.js"></script>
+	<script src="/kitadmin/layui.js"></script>
+	<script src="/kitadmin/kitadmin.js"></script>
+	<script src="/kitadmin/mockjs-config.js"></script>
+	<!-- endbuild -->
+	<!-- build:use -->
+	<script>
+		layui.config({
+			base: '/js/'
+		}).use('index');
+	</script>
+	<!-- endbuild -->
+</body>
+
+</html>

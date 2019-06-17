@@ -1,0 +1,161 @@
+<div class="layui-fluid">
+  <div class="layui-row">
+    <div class="layui-col-xs12">
+      <div class="layui-card">
+        <div class="layui-card-header">
+          <a href="#/manager/sysd/setd/list" title="返回列表" <#assign var=checkRole("/manager/sysd/setd/list") />${var}>
+            <i class="layui-icon">&#xe65c;</i>
+          </a>
+          <span>${SHOWTITLE}</span>
+
+        </div>
+        <div class="layui-card-body">
+          <form class="layui-form" action="">
+            <input type="hidden" name="ACTIONMODE" value="${ACTIONMODE}">
+
+            <#if ACTIONMODE == 'ADD' >
+              <input type="hidden" name="upperCode" value ="<#if pcode ??>${pcode}</#if>" >
+              <input type="hidden" name="level" value ="<#if levels ??>${levels}</#if>" >
+              <#else>
+              <input type="hidden" name="upperCode" value ="<#if vo ??>${vo.upperCode}</#if>" >
+              <input type="hidden" name="level" value ="<#if vo ??>${vo.level}</#if>" >
+              <input type="hidden" name="encCode" value="<#if vo ??>${encCode}</#if>"/>
+            </#if>
+            <div class="layui-form-item">
+              <label class="layui-form-label">设置名称 </label>
+              <div class="layui-input-block">
+                <input type="text" name="name" value ="<#if vo ??>${vo.name}</#if>" required lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
+              </div>
+            </div>
+
+            <div class="layui-form-item">
+              <label class="layui-form-label">次序</label>
+              <div class="layui-input-block">
+                <input type="text" name="seq" value ="<#if vo ??>${vo.seq}</#if>"  placeholder="" autocomplete="off" class="layui-input">
+              </div>
+            </div>
+
+            <div class="layui-form-item">
+              <label class="layui-form-label">CodeKey</label>
+              <div class="layui-input-block">
+                <input type="text" name="codeKey" value ="<#if vo ??>${vo.codeKey}</#if>"  required lay-verify="required"  placeholder="" autocomplete="off" class="layui-input">
+              </div>
+            </div>
+
+            <div class="layui-form-item">
+              <label class="layui-form-label">attrValue1</label>
+              <div class="layui-input-block">
+                <input type="text" name="attrValue1" value ="<#if vo ??>${vo.attrValue1}</#if>"  placeholder="" autocomplete="off" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">attrValue2</label>
+              <div class="layui-input-block">
+                <input type="text" name="attrValue2" value ="<#if vo ??>${vo.attrValue2}</#if>"  placeholder="" autocomplete="off" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">attrValue3</label>
+              <div class="layui-input-block">
+                <input type="text" name="attrValue3" value ="<#if vo ??>${vo.attrValue3}</#if>"  placeholder="" autocomplete="off" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">attrValue4</label>
+              <div class="layui-input-block">
+                <input type="text" name="attrValue4" value ="<#if vo ??>${vo.attrValue4}</#if>"  placeholder="" autocomplete="off" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">attrValue5</label>
+              <div class="layui-input-block">
+                <input type="text" name="attrValue5" value ="<#if vo ??>${vo.attrValue5}</#if>"  placeholder="" autocomplete="off" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">attrValue6</label>
+              <div class="layui-input-block">
+                <input type="text" name="attrValue6" value ="<#if vo ??>${vo.attrValue6}</#if>"  placeholder="" autocomplete="off" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">attrValue7</label>
+              <div class="layui-input-block">
+                <input type="text" name="attrValue7" value ="<#if vo ??>${vo.attrValue7}</#if>"  placeholder="" autocomplete="off" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">attrValue8</label>
+              <div class="layui-input-block">
+                <input type="text" name="attrValue8" value ="<#if vo ??>${vo.attrValue8}</#if>"  placeholder="" autocomplete="off" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">attrValue9</label>
+              <div class="layui-input-block">
+                <input type="text" name="attrValue9" value ="<#if vo ??>${vo.attrValue9}</#if>"  placeholder="" autocomplete="off" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">attrValue10</label>
+              <div class="layui-input-block">
+                <input type="text" name="attrValue10" value ="<#if vo ??>${vo.attrValue10}</#if>"  placeholder="" autocomplete="off" class="layui-input">
+              </div>
+            </div>
+
+            <div class="layui-form-item layui-form-text">
+              <label class="layui-form-label">说明</label>
+              <div class="layui-input-block">
+                <textarea name="descp" placeholder="请输入说明" class="layui-textarea"><#if vo ??>${vo.descp}</#if></textarea>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="LAY-table-sysdsetdedit-form_hash" <#assign var=checkRole("/manager/sysd/setd/boaction/EDIT") />${var}>立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  layui.use(['table','jquery','form'], function () {
+    var $ = layui.jquery,
+            form = layui.form;
+    form.render();
+    //监听提交
+    form.on('submit(LAY-table-sysdsetdedit-form_hash)', function (data) {
+      $.post('/manager/sysd/setd/bo/save', data.field, function (res) {
+        if (res==1) {
+          layer.open({
+            type: 1
+            ,title: '操作成功'
+            ,closeBtn: false
+            ,area: '300px;'
+            ,shade: 0.8
+            ,id: 'VO_ACTION' //设定一个id，防止重复弹出
+            ,btn: ['确定']
+            ,btnAlign: 'c'
+            ,moveType: 1 //拖拽模式，0或者1
+            ,yes: function(index){
+              layer.close(index);
+		          parent.treetblrand();
+            },
+            btn2: function(){
+            }
+          });
+        }else{
+          layer.msg("操作失败，请稍后重试", {time: 2000});
+        }
+      }, 'json');
+      return false;
+    });
+  });
+
+</script>
+<style>
+</style>
