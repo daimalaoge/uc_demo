@@ -27,6 +27,7 @@ UI框架：KitAdmin（基于LayUI）</p>
 业务防篡改功能：uc_utils</p>
 自动匹配基础代码：反射注入</p>
 lombok插件</p>
-
+数据库：jpa</p>
+数据库查询：dsl</p>
 </p>
 
