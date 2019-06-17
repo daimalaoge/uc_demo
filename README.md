@@ -18,7 +18,7 @@ uc_demo项目是Union Componen项目中的一个用例。本用例是一个后�
 4、通过联合组件，可以不断增强业务功能</p>
 5、前后端分离
 </p>
-使用到的技术：</p>
+本项目使用技术：</p>
 基本核心：Spring Boot 2.0以上版本</p>
 UI框架：KitAdmin（基于LayUI）</p>
 前端展示：Freemarker</p>
@@ -29,5 +29,6 @@ UI框架：KitAdmin（基于LayUI）</p>
 lombok插件</p>
 数据库：jpa</p>
 数据库查询：dsl</p>
+内存缓存：ehcache</p>
 </p>
 
