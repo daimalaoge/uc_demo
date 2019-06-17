@@ -1,12 +1,16 @@
 package com.ucomponent.manager.service;
 
-import java.util.List;
+import com.ucomponent.base.entity.BizCodeSetList;
+import com.ucomponent.base.entity.CodeSetList;
+
+import com.ucomponent.manager.platf.repository.MangBizCodesetRepository;
+import com.ucomponent.manager.sys.repository.MangSysCodesetRepository;
+import com.ucomponent.manager.po.MangBizCodeset;
+import com.ucomponent.manager.po.MangSysCodeset;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ucomponent.base.entity.CodeSetList;
-import com.ucomponent.po.SysCodeset;
-import com.ucomponent.repository.SysCodesetRepository;
+import java.util.List;
 
 /**
  * 2018年9月30日
@@ -17,14 +21,15 @@ import com.ucomponent.repository.SysCodesetRepository;
 @Service
 public class InitService {
   @Autowired
-  private SysCodesetRepository ucmCodesetRepository;
+  private MangSysCodesetRepository ucmCodesetRepository;
+  @Autowired
+  private MangBizCodesetRepository bizCodesetRepository;
   
   public void sysInit(){
-    System.out.println("+++++++ SYS INIT +++++++");
-    
-    System.out.println("STEP 1. CodeSet init");
+    System.out.println("+++++++ SYS CODE INIT +++++++");
+    System.out.println("STEP 2. CodeSet init");
     CodeSetList scmap = CodeSetList.getInstance();
-    List<SysCodeset> list = ucmCodesetRepository.findByCodesetGstatusOrderBySeq("G_STATUS_USE");
+    List<MangSysCodeset> list = ucmCodesetRepository.findByCodesetGstatusOrderBySeq("G_STATUS_USE");
     scmap.setList(list);
   }
 }

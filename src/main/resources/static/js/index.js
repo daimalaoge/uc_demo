@@ -1,15 +1,15 @@
 layui.define(['element', 'sidebar', 'mockjs', 'menu', 'route', 'utils', 'component', 'kit', 'apiconfig', 'tabs'], function(exports) {
   var element = layui.element,
-    utils = layui.utils,
-    $ = layui.jquery,
-    _ = layui.lodash,
-    route = layui.route,
-    layer = layui.layer,
-    menu = layui.menu,
-    tabs = layui.tabs,
-    component = layui.component,
-    apiconfig = layui.apiconfig,
-    kit = layui.kit;
+      utils = layui.utils,
+      $ = layui.jquery,
+      _ = layui.lodash,
+      route = layui.route,
+      layer = layui.layer,
+      menu = layui.menu,
+      tabs = layui.tabs,
+      component = layui.component,
+      apiconfig = layui.apiconfig,
+      kit = layui.kit;
 
 
   var Admin = function() {
@@ -23,7 +23,7 @@ layui.define(['element', 'sidebar', 'mockjs', 'menu', 'route', 'utils', 'compone
 
   Admin.prototype.ready = function(callback) {
     var that = this,
-      config = that.config;
+        config = that.config;
 
     // 初始化加载方式
     const { getItem } = utils.localStorage;
@@ -31,7 +31,7 @@ layui.define(['element', 'sidebar', 'mockjs', 'menu', 'route', 'utils', 'compone
     if (setting !== null && setting.loadType !== undefined) {
       config.loadType = setting.loadType;
     }
-    
+
     kit.set({
       type: config.loadType
     }).init();
@@ -46,7 +46,7 @@ layui.define(['element', 'sidebar', 'mockjs', 'menu', 'route', 'utils', 'compone
     }
     // 跳转至首页
     if (location.hash === '') {
-      utils.setUrlState('主页', '#/');
+      utils.setUrlState('主页', '#/manager/index');
     }
 
     // 监听头部右侧 nav
@@ -56,7 +56,7 @@ layui.define(['element', 'sidebar', 'mockjs', 'menu', 'route', 'utils', 'compone
         // 绑定sidebar
         layui.sidebar.render({
           elem: _that.elem,
-          //content:'', 
+          //content:'',
           title: '设置',
           shade: true,
           // shadeClose:false,
@@ -92,8 +92,12 @@ layui.define(['element', 'sidebar', 'mockjs', 'menu', 'route', 'utils', 'compone
       var routeOpts = {
         routes: [{
           path: '/',
-          component: '/main',
+          component: '/manager/main',
           name: 'Home'
+        },{
+          path: '/',
+          component: '/login',
+          name: 'login'
         }]
       };
 
@@ -108,14 +112,14 @@ layui.define(['element', 'sidebar', 'mockjs', 'menu', 'route', 'utils', 'compone
             tabs.switchByPath(location.hash);
           }
         }
-      }    
+      }
       $.each($("a"),function(i,obj){
-      	var p =  {
-	        path: $(this).attr("data"),
-	        component: $(this).attr("data"),
-	        name: $(this).attr("name")
+        var p =  {
+          path: $(this).attr("data"),
+          component: $(this).attr("data"),
+          name: $(this).attr("name")
         };
-      	routeOpts.routes.push(p);
+        routeOpts.routes.push(p);
       });
       route.setRoutes(routeOpts);
       return this;
@@ -135,7 +139,7 @@ layui.define(['element', 'sidebar', 'mockjs', 'menu', 'route', 'utils', 'compone
     },
     menuInit: function(config) {
       var that = this;
- 
+
       const { user } = apiconfig;
       const { getMenus } = user;
       // 配置menu
@@ -143,14 +147,14 @@ layui.define(['element', 'sidebar', 'mockjs', 'menu', 'route', 'utils', 'compone
         dynamicRender: false,
         elem: '#menu-box',
         isJump: config.loadType === 'SPA',
-        onClicked: function(obj) {        	
+        onClicked: function(obj) {
           if (config.loadType === 'TABS') {
             if (!obj.hasChild) {
               var data = obj.data;
               var href = data.href;
               var layid = data.layid;
               that.addTab(href, layid);
-             }
+            }
           }
         },
         remote: {

@@ -1,5 +1,7 @@
 package com.ucomponent.base.controller;
 
+import com.ucomponent.base.controller.rest.BaseRestController;
+
 import java.util.List;
 
 /**
@@ -9,9 +11,6 @@ import java.util.List;
  * NAME:
  * Descp:
 **/
-public class BaseController {
-	public List<BaseLayuiVO> codeKeyConvert(List<BaseLayuiVO> jsonlist){
-		
-	  return new ControllerTools().codeKeyConvert(jsonlist);
-	}
+public class BaseController extends BaseRestController {
+
 }

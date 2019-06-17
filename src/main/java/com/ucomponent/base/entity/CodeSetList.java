@@ -1,9 +1,11 @@
 package com.ucomponent.base.entity;
 
+import com.ucomponent.manager.po.MangSysCodeset;
+import org.springframework.context.annotation.Scope;
+
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.context.annotation.Scope;
-import com.ucomponent.po.SysCodeset;
+
 /**
  * 2018年9月30日
  * 代码老哥
@@ -22,29 +24,37 @@ public class CodeSetList {
 
   //private Map<String,String> map = new HashMap<String,String>();
   
-  private List<SysCodeset> list = new ArrayList<SysCodeset>();
+  private List<MangSysCodeset> list = new ArrayList<MangSysCodeset>();
   
-  public void setList(List<SysCodeset> list) {
+  public void setList(List<MangSysCodeset> list) {
     this.list = list;
   }
   
   public void clearList() {
-    this.list = new ArrayList<SysCodeset>();
+    this.list = new ArrayList<MangSysCodeset>();
   }
 
-  public List<SysCodeset> getList(String pCodekey){
-    List<SysCodeset> rlist = new ArrayList<SysCodeset>();
-    for(SysCodeset uc:list){
+  public List<MangSysCodeset> getList(String pCodekey){
+    List<MangSysCodeset> rlist = new ArrayList<MangSysCodeset>();
+    for(MangSysCodeset uc:list){
       if(uc.getUpperCode().equals(pCodekey)){
         rlist.add(uc);
       }
     }
     return rlist;
   }
+
+  public MangSysCodeset getByCode(String codekey){
+    for(MangSysCodeset uc:list){
+      if(uc.getCodeKey().equals(codekey)){
+        return uc;
+      }
+    }
+    return null;
+  }
   
   public String getName(String codekey){
-    List<SysCodeset> rlist = new ArrayList<SysCodeset>();
-    for(SysCodeset uc:list){
+    for(MangSysCodeset uc:list){
       if(uc.getCodeKey().equals(codekey)){
         return uc.getName();
       }
