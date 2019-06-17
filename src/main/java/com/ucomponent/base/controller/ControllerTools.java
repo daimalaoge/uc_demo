@@ -14,7 +14,6 @@ import java.util.List;
 import com.ucomponent.base.ICommons;
 import com.ucomponent.base.controller.vo.BaseLayuiVO;
 import com.ucomponent.base.encrypt.EncryptPO;
-import com.ucomponent.base.entity.BizCodeSetList;
 import com.ucomponent.base.entity.CodeSetList;
 
 /**
@@ -25,17 +24,11 @@ import com.ucomponent.base.entity.CodeSetList;
  * @Author:Daimalaoge
  */
 public class ControllerTools  implements ICommons {
-	/**
-	 * BIZ业务用
-	 * @param key
-	 * @param jsonlist
-	 * @return
-	 */
-	public List<BaseLayuiVO> bizCodeKeyConvert(String key, List<BaseLayuiVO> jsonlist){
-		System.out.println(jsonlist);
-		List<BaseLayuiVO> list = new ArrayList<BaseLayuiVO>();
+	public BaseLayuiVO codeKeyConvert(String key,BaseLayuiVO jobj){
+		CodeSetList cslist = CodeSetList.getInstance();
+		Object jo = new Object();
 		try {
-			list = deepCopyList(jsonlist);
+			jo = deepCopyObject(jobj);
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -43,61 +36,10 @@ public class ControllerTools  implements ICommons {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		BizCodeSetList cslist = BizCodeSetList.getInstance();
-		for(Object jo:list){
-			Method[] md = jo.getClass().getMethods();
-			Field[] fs = jo.getClass().getDeclaredFields();
-			for (Field field : fs) {
-				// 得到成员变量的类型的类类型
-				Class fieldType = field.getType();
-				if(!isPoType(fieldType)){
-					try {
-						field.setAccessible(true);
-						Object value = field.get(jo); // 取变量的值
-						codeKeyConvertObject(value);
-					}catch (IllegalAccessException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
-			for(Method m:md){
-				String mname = m.getName();
-				if(mname.indexOf(GET_BIZ_CODESET) != -1 ){
-					String cname = mname.replaceAll(GET_BIZ_CODESET, "");
-					System.out.println("cname========="+cname);
-					Class<?> clazz = jo.getClass();
-					try {
-						Method method = clazz.getMethod(mname);
-						Method setmethod = clazz.getMethod(SET_BIZ_CODESET+cname,String.class);
-						System.out.println(cslist.getName((String)method.invoke(jo)));
-						setmethod.invoke(jo,cslist.getName((String)method.invoke(jo)));
-					} catch (IllegalAccessException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IllegalArgumentException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (InvocationTargetException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
-		}
-		list = EncryptPO.encList(key,list);
-		System.out.println(list);
-		return list;
-	}
-
-	public Object bizCodeKeyConvertObject(Object jo){
 		Method[] md = jo.getClass().getMethods();
 		Field[] fs = jo.getClass().getDeclaredFields();
 		for (Field field : fs) {
-			// 得到成员变量的类型的类类型 - 递归
+			// 得到成员变量的类型的类类型
 			Class fieldType = field.getType();
 			if(!isPoType(fieldType)){
 				try {
@@ -110,15 +52,14 @@ public class ControllerTools  implements ICommons {
 				}
 			}
 		}
-		BizCodeSetList cslist = BizCodeSetList.getInstance();
 		for(Method m:md){
 			String mname = m.getName();
-			if(mname.contains(GET_BIZ_CODESET) ){
-				String cname = mname.replaceAll(GET_BIZ_CODESET, "");
+			if(mname.indexOf("getCodeset") != -1 ){
+				String cname = mname.replaceAll("getCodeset", "");
 				Class<?> clazz = jo.getClass();
 				try {
 					Method method = clazz.getMethod(mname);
-					Method setmethod = clazz.getMethod(SET_BIZ_CODESET+cname,String.class);
+					Method setmethod = clazz.getMethod("setCodeset"+cname,String.class);
 					setmethod.invoke(jo,cslist.getName((String)method.invoke(jo)));
 				} catch (IllegalAccessException e) {
 					// TODO Auto-generated catch block
@@ -135,9 +76,8 @@ public class ControllerTools  implements ICommons {
 				}
 			}
 		}
-		return jo;
+		return (BaseLayuiVO)jo;
 	}
-
 	/**
 	 * System Use
 	 * @param key
@@ -202,7 +142,7 @@ public class ControllerTools  implements ICommons {
 		list = EncryptPO.encList(key,list);
 		return list;
 	}
-	public Object codeKeyConvertObject(Object jo){
+	private Object codeKeyConvertObject(Object jo){
 		Method[] md = jo.getClass().getMethods();
 		Field[] fs = jo.getClass().getDeclaredFields();
 		for (Field field : fs) {
@@ -256,6 +196,18 @@ public class ControllerTools  implements ICommons {
 		ObjectInputStream in = new ObjectInputStream(byteIn);
 		@SuppressWarnings("unchecked")
 		List<T> dest = (List<T>) in.readObject();
+		return dest;
+	}
+
+	private static Object deepCopyObject(Object src) throws IOException, ClassNotFoundException {
+		ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
+		ObjectOutputStream out = new ObjectOutputStream(byteOut);
+		out.writeObject(src);
+
+		ByteArrayInputStream byteIn = new ByteArrayInputStream(byteOut.toByteArray());
+		ObjectInputStream in = new ObjectInputStream(byteIn);
+		@SuppressWarnings("unchecked")
+		Object dest = (Object) in.readObject();
 		return dest;
 	}
 	/**

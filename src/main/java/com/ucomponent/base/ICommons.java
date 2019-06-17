@@ -70,6 +70,8 @@ public abstract interface ICommons {
 	public static final String UCMANAGER_ACTION_ADDTITLE= "新增";
 	//UC后台数据修改标题
 	public static final String UCMANAGER_ACTION_EDITTITLE= "修改";
+	//UC后台数据详情标题
+	public static final String UCMANAGER_ACTION_INFORTITLE= "详情";
 	/* EncryptFileGen Key vaule*/
 	public static final String ENCRY_FILE_KEY =	"123456"	;
 	/* EncryptStringGen Key vaule*/
@@ -83,5 +85,6 @@ public abstract interface ICommons {
 	public static final String PLANTFORM_CODE =	"PLT_DEFORG_MANAGER"	;
 	//默认平台SRCCODE
 	public static final String PLANTFORM_SRCCODE =	"manager"	;
-
+	//默认平台SRCCODE
+	public static final int ORG_ID =1	;
 }

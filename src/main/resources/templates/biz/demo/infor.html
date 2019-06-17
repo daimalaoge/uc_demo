@@ -1,0 +1,85 @@
+<div class="layui-fluid">
+  <div class="layui-row">
+    <div class="layui-col-xs12">
+      <div class="layui-card">
+        <div class="layui-card-header">
+          <a href="#/biz/ceshi/demo/list" title="返回列表">
+            <i class="layui-icon">&#xe65c;</i>
+          </a>
+          <span>${SHOWTITLE}</span>
+
+        </div>
+        <div class="layui-card-body">
+          <form class="layui-form" action="">
+
+            <div class="layui-form-item">
+              <label class="layui-form-label">名称</label>
+              <div class="layui-form-label">
+                <#if vo ??>${vo.mingcheng}</#if>
+              </div>
+            </div>
+
+            <div class="layui-form-item">
+              <label class="layui-form-label">唯一代码</label>
+              <div class="layui-form-label">
+                <#if vo ??>${vo.weiyidaima}</#if>
+              </div>
+            </div>
+
+            <div class="layui-form-item">
+              <label class="layui-form-label">分类</label>
+              <div class="layui-form-label">
+                <#if vo ??>${vo.codesetFenlei}</#if>
+              </div>
+            </div>
+
+            <div class="layui-form-item">
+              <label class="layui-form-label">金额</label>
+              <div class="layui-form-label">
+                <#if vo ??>${vo.jine}</#if>
+              </div>
+            </div>
+
+            <div class="layui-form-item">
+              <label class="layui-form-label">发生日期</label>
+              <div class="layui-form-label">
+                <#if vo ??>${vo.fashengriqi}</#if>
+              </div>
+            </div>
+
+            <div class="layui-form-item">
+              <label class="layui-form-label"> 总人数</label>
+              <div class="layui-form-label">
+                <#if vo ??>${vo.zongrenshu}</#if>
+              </div>
+            </div>
+
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+	layui.use(['laydate','upload','table','jquery','form'], function () {
+		var $ = layui.jquery,
+				upload = layui.upload,
+				laydate = layui.laydate,
+				table = layui.table,
+				form = layui.form;
+
+		laydate.render({
+			elem: '#LAY-table-tushuguanli-ceshiyongli-fashengriqi-infor'
+		});
+
+
+		form.render();
+	
+
+	});
+
+</script>
+<style>
+</style>

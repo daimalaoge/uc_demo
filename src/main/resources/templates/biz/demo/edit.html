@@ -1,0 +1,138 @@
+<div class="layui-fluid">
+  <div class="layui-row">
+    <div class="layui-col-xs12">
+      <div class="layui-card">
+        <div class="layui-card-header">
+          <a href="#/biz/ceshi/demo/list" title="返回列表">
+            <i class="layui-icon">&#xe65c;</i>
+          </a>
+          <span>${SHOWTITLE}</span>
+          
+        </div>
+        <div class="layui-card-body">
+          <form class="layui-form" action="">
+          	<input type="hidden" name="ACTIONMODE" value="${ACTIONMODE}">
+            <#if ACTIONMODE == 'ADD' >
+            <#else>
+              <input type="hidden" name="encCode" value="<#if vo ??>${encCode}</#if>"/>
+
+            </#if>
+            
+						<div class="layui-form-item">
+							<label class="layui-form-label">名称</label>
+							<div class="layui-input-block">
+								<input type="text" name="mingcheng" value ="<#if vo ??>${vo.mingcheng}</#if>"  id="LAY-table-tushuguanli-ceshiyongli-biz_codeset_mingcheng-editinput"   required lay-verify="required"  placeholder="" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+
+						<div class="layui-form-item">
+							<label class="layui-form-label">唯一代码</label>
+							<div class="layui-input-block">
+								<input type="text" name="weiyidaima" value ="<#if vo ??>${vo.weiyidaima}</#if>"  id="LAY-table-tushuguanli-ceshiyongli-biz_codeset_weiyidaima-editinput"   required lay-verify="required"  placeholder="" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+
+						<div class="layui-form-item">
+							<label class="layui-form-label">分类</label>
+							<div class="layui-input-block">
+								<select name="codesetFenlei" lay-verify="required" >
+									<#list BIZ_FENLEI! as set>
+										<option value="${set.codeKey}" <#if vo ??><#if vo.codesetFenlei == set.codeKey >selected</#if></#if> >${set.name}</option>
+									</#list>
+								</select>
+							</div>
+						</div>
+
+						<div class="layui-form-item">
+							<label class="layui-form-label">金额</label>
+							<div class="layui-input-block">
+								<input type="text" name="jine" value ="<#if vo ??>${vo.jine}</#if>"  id="LAY-table-tushuguanli-ceshiyongli-jine-editinput"   placeholder="" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+
+						<div class="layui-form-item">
+							<label class="layui-form-label">发生日期</label>
+							<div class="layui-input-block">
+								<input type="text" name="fashengriqi" value ="<#if vo ??>${vo.fashengriqi}</#if>"  placeholder="yyyy-MM-dd"  id="LAY-table-tushuguanli-ceshiyongli-fashengriqi-editinput"   placeholder="" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+
+						<div class="layui-form-item">
+							<label class="layui-form-label"> 总人数</label>
+							<div class="layui-input-block">
+								<input type="text" name="zongrenshu" value ="<#if vo ??>${vo.zongrenshu}</#if>"  id="LAY-table-tushuguanli-ceshiyongli-zongrenshu-editinput"   required lay-verify="required"  placeholder="" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+
+
+
+            <div class="layui-form-item">
+              <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="LAY-table-tushuguanli-ceshiyongli-edit-form_hash" <#assign var=checkRole("/biz/ceshi/demo/boaction/ADD") />${var} >立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  layui.use(['laydate','upload','table','jquery','form'], function () {  	
+  	var $ = layui.jquery,
+  	upload = layui.upload,
+  	laydate = layui.laydate,
+  	table = layui.table,
+    form = layui.form;
+    
+		laydate.render({
+				elem: '#LAY-table-tushuguanli-ceshiyongli-fashengriqi-editinput'
+		});
+
+
+	  form.render();
+    form.on('submit(LAY-table-tushuguanli-ceshiyongli-edit-form_hash)', function (data) {
+      $.post('/biz/ceshi/demo/bo/save', data.field, function (res) {
+			  if (res==1) {
+		      layer.open({
+		        type: 1
+		        ,title: '操作成功' 
+		        ,closeBtn: false
+		        ,area: '300px;'
+		        ,shade: 0.8
+		        ,id: 'LAY-table-tushuguanli-ceshiyongli-edit-ACTION' //设定一个id，防止重复弹出
+		        ,btn: ['确定']
+		        ,btnAlign: 'c'
+		        ,moveType: 1 //拖拽模式，0或者1
+		        ,yes: function(index){
+        			layer.close(index);
+				      parent.layui.table.reload("LAY-table-tushuguanli-ceshiyongli-DATALIST"); // 页面刷新        			//showToast();
+    				},
+    				btn2: function(){
+    				}
+		      });
+				}
+				else if(res==-1){
+					layer.msg("编码有重复", {time: 2000});
+				}
+				else if(res==-1){
+					layer.msg("发行编号有重复", {time: 2000});
+				}
+				else if(res==-1){
+					layer.msg("唯一代码有重复", {time: 2000});
+				}
+ 				
+				else{
+					layer.msg("操作失败，请稍后重试", {time: 2000});
+				}
+			}, 'json');
+      return false;
+    });
+
+  });
+
+</script>
+<style>
+</style>

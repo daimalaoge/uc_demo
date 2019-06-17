@@ -1,0 +1,197 @@
+<!-- 模板 -->
+<div class="layui-fluid">
+  <div class="layui-row">
+    <div class="layui-col-xs12">
+      <div class="layui-card">
+        <div class="layui-card-header">
+          <!-- <span>所有功能列表</span> -->
+          <a href="#/biz/ceshi/demo/boaction/ADD" class="layui-btn layui-btn-xs" <#assign var=checkRole("/biz/ceshi/demo/boaction/ADD") />${var}>
+            <i class="layui-icon">&#xe654;</i>
+            <span>新增</span>
+          </a>
+          <a href="javascript:;" class="layui-btn layui-btn-xs layui-btn-primary" id="LAY-table-tushuguanli-ceshiyongli-search_hash">
+            <i class="layui-icon">&#xe615;</i>
+          </a>
+        </div>
+        <div class="layui-card-body">
+          <table id="LAY-table-tushuguanli-ceshiyongli-DATALIST" lay-filter="LAY-table-tushuguanli-ceshiyongli-list_action"></table>
+          <script type="text/html" id="LAY-table-tushuguanli-ceshiyongli-toolbar_hash">
+              <a class="layui-btn layui-btn-xs" lay-event='status' <#assign var=checkRole("/biz/ceshi/demo/bo/status") />${var}>设置状态</a>
+              <a href="javascript:;" class="layui-btn layui-btn-xs" lay-event='edit' <#assign var=checkRole("/biz/ceshi/demo/boaction/EDIT") />${var}>编辑</a>
+              <a href="javascript:;" class="layui-btn layui-btn-xs" lay-event='infor' <#assign var=checkRole("/biz/ceshi/demo/infor") />${var}>详细</a>
+              <a href="javascript:;" class="layui-btn layui-btn-xs" lay-event='del' <#assign var=checkRole("/biz/ceshi/demo/bo/del") />${var}>删除</a>
+            </script>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/html" id="LAY-table-tushuguanli-ceshiyongli-search_tpl_hash">
+  <form class="layui-form" action="">
+		<div class="layui-form-item">
+			<label class="layui-form-label">名称</label>
+			<div class="layui-input-block">
+				<input type="text" name="bizCodesetMingcheng"  placeholder="请输入名称.." autocomplete="off"  id="LAY-table-tushuguanli-ceshiyongli-biz_codeset_mingcheng-listinput"  class="layui-input">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">唯一代码</label>
+			<div class="layui-input-block">
+				<input type="text" name="bizCodesetWeiyidaima"  placeholder="请输入唯一代码.." autocomplete="off"  id="LAY-table-tushuguanli-ceshiyongli-biz_codeset_weiyidaima-listinput"  class="layui-input">
+			</div>
+		</div>
+
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">数据状态</label>
+      <div class="layui-input-block">
+        <input type="radio" name="status" value="G_STATUS_USE" title="可用" checked>
+        <input type="radio" name="status" value="G_STATUS_NOUSE" title="禁用" >
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <div class="layui-input-block">
+        <button class="layui-btn" lay-submit lay-filter="LAY-table-tushuguanli-ceshiyongli-form_hash"><i class="layui-icon">&#xe615;</i> 搜索</button>
+        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+      </div>
+    </div>
+  </form>
+</script>
+<!-- 脚本 -->
+<script>
+  layui.use(['laydate','jquery', 'table', 'sidebar', 'form'], function () {
+    var $ = layui.jquery,
+      layer = layui.layer,
+      table = layui.table,
+      sidebar = layui.sidebar,
+      upload = layui.upload,
+      laydate = layui.laydate,
+      form = layui.form;
+    var router = layui.router();
+    //TABLE实例
+    
+		laydate.render({
+				elem: '#LAY-table-tushuguanli-ceshiyongli-fashengriqi-listinput'
+		});
+    table.render({
+      method: 'post',
+      // size: 'sm',
+      limit: 20,
+      elem: '#LAY-table-tushuguanli-ceshiyongli-DATALIST',
+      height: 'full-235',
+      url: '/biz/ceshi/demo/list/data/', //数据接口
+      cellMinWidth: 100,
+      page: true, //开启分页
+      cols: [
+        [ //表头
+          {
+            type: 'numbers',
+            title: 'No.',
+            width: 80,
+            sort: true,
+            fixed: 'left',
+          }, 
+					{
+						field: 'mingcheng',
+						title: '名称',
+					},
+	        {
+		        field: 'weiyidaima',
+		        title: '唯一代码',
+	        },
+	        {
+		        field: 'codesetFenlei',
+		        title: '分类',
+	        },
+					{
+						field: 'jine',
+						title: '金额',
+					},
+					{
+						field: 'fashengriqi',
+						title: '发生日期',
+					},
+					{
+						field: 'zongrenshu',
+						title: ' 总人数',
+					},
+					{
+						field: 'createDatetime',
+						title: '创建时间',
+					},
+					{
+						field: 'createUserId',
+						title: '创建人ID',
+					},
+          
+          
+          {
+            field: 'codesetGstatus',
+            title: '状态',
+            width: 100,
+            sort: true
+          }, {
+            fixed: 'right',
+            title: '操作',
+            width: 250,
+            align: 'center',
+            toolbar: '#LAY-table-tushuguanli-ceshiyongli-toolbar_hash'
+          }
+        ]
+      ]
+    });
+
+    $('#LAY-table-tushuguanli-ceshiyongli-search_hash').on('click', function () {
+      var that = this;
+      sidebar.render({
+        elem: that,
+        content: $('#LAY-table-tushuguanli-ceshiyongli-search_tpl_hash').html(),
+        title: '搜索',
+        shade: true,
+        width: '500px', //可以设置百分比和px
+        done: function () {
+          form.render();
+          //监听提交
+          form.on('submit(LAY-table-tushuguanli-ceshiyongli-form_hash)', function (data) {
+            table.reload('LAY-table-tushuguanli-ceshiyongli-DATALIST', {
+              where: data.field
+            });
+            return false;
+          });
+        }
+      });
+    });
+    
+     //监听行工具事件
+     //注：tool 是工具条事件名，LAY-table-tushuguanli-ceshiyongli-list_action 是 table 原始容器的属性 lay-filter="对应的值"
+	  table.on('tool(LAY-table-tushuguanli-ceshiyongli-list_action)', function(obj){ 
+	    var data = obj.data //获得当前行数据
+	    ,layEvent = obj.event; //获得 lay-event 对应的值
+	    if(layEvent === 'status'){
+	      layer.confirm('将要设置本数据状态吗？', function(index){   
+	        $.post('/biz/ceshi/demo/bo/status', "encCode="+data.encCode, function (res) {
+			      layer.msg("设置成功",{time:1*1000},function(){
+				      table.reload('LAY-table-tushuguanli-ceshiyongli-DATALIST');
+			    	})
+					}, 'json');
+				});
+	    } else if(layEvent === 'del'){
+	      layer.confirm('请确定删除（本操作不可恢复）', function(index){   
+	        $.post('/biz/ceshi/demo/bo/del', "encCode="+data.encCode, function (res) {
+			      layer.msg("删除成功",{time:1*1000},function(){
+				      table.reload('LAY-table-tushuguanli-ceshiyongli-DATALIST');
+			    	})
+					}, 'json');
+				});
+	    } else if(layEvent === 'edit'){
+		    $(this).attr("href" ,'#/biz/ceshi/demo/boaction/EDIT?encCode='+data.encCode);
+	    } else if(layEvent === 'infor'){
+		    $(this).attr("href" ,'#/biz/ceshi/demo/infor?encCode='+data.encCode);
+	    }
+	  });
+  });
+</script>
+
+<!-- 样式 -->
+<style scoped>
+</style>

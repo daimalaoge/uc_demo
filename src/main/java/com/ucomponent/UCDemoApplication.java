@@ -30,6 +30,7 @@ public class UCDemoApplication {
   private InitService initService;
   
   public static void main(String[] args) {
+
     SpringApplication.run(UCDemoApplication.class, args);
   }
   
@@ -38,30 +39,5 @@ public class UCDemoApplication {
     initService.sysInit();
     return "INIT";
   }
-  
-//  @Bean
-//  public CommandLineRunner customFreemarker(FreeMarkerViewResolver resolver) {
-//    return new CommandLineRunner() {
-//      @Override
-//      public void run(String... strings) throws Exception {
-//        System.out.println("+++++ ADD DEF Freemarker View +++++");
-//        //增加视图
-//        resolver.setViewClass(MyFreemarkerView.class);
-//        //添加自定义解析器
-//        Map map = resolver.getAttributesMap();
-//        map.put("conver", new DefaultCover());
-//      }
-//    };
-//  }
-//  /**
-//   * 增加系统对undertow的支持
-//   * @return
-//   */
-//  @Bean
-//  public UndertowEmbeddedServletContainerFactory embeddedServletContainerFactory() {
-//    UndertowEmbeddedServletContainerFactory factory = new UndertowEmbeddedServletContainerFactory();
-//    // 这里也可以做其他配置
-//    factory.addBuilderCustomizers(builder -> builder.setServerOption(UndertowOptions.ENABLE_HTTP2, true));
-//    return factory;
-//  }
+
 }
