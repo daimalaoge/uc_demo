@@ -1,5 +1,6 @@
 # uc_demo
 uc_demo UC快速开发框架
+![http://att.newsmth.net/nForum/att/Java/426119/1868/large]
 </p>
 uc_demo项目是Union Componen项目中的一个用例。本用例是一个后台的全功能实现，包括以下功能：   </p>
 1、基础权限管理实现</p>
