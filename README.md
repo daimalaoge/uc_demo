@@ -1,9 +1,19 @@
 # uc_demo
 uc_demo UC快速开发框架</p>
-![image](http://att.newsmth.net/nForum/att/Java/426119/1868/large)
-
-![image](https://github.com/ButBueatiful/dotvim/raw/master/screenshots/vim-screenshot.jpg)
-</p>
+登录界面</p>
+![image](http://att.newsmth.net/nForum/att/Java/426119/1868/)</p>
+系统代码（数据字典）管理</p>
+![image](http://att.newsmth.net/nForum/att/Java/426119/19717/)</p>
+系统账号管理</p>
+![image](http://att.newsmth.net/nForum/att/Java/426119/85023)</p>
+权限组管理</p>
+![image](http://att.newsmth.net/nForum/att/Java/426119/137300)</p>
+系统日志查看</p>
+![image](http://att.newsmth.net/nForum/att/Java/426119/229064)</p>
+Demo示范</p>
+![image](http://att.newsmth.net/nForum/att/Java/426119/340379)</p>
+权限设置</p>
+![image](http://att.newsmth.net/nForum/att/Java/426119/393248)</p>
 uc_demo项目是Union Componen项目中的一个用例。本用例是一个后台的全功能实现，包括以下功能：   </p>
 1、基础权限管理实现</p>
 2、基础菜单管理实现</p>
