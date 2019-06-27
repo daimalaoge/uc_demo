@@ -44,4 +44,8 @@ lombok插件</p>
 数据库查询：dsl</p>
 内存缓存：ehcache</p>
 </p>
+项目使用 </p>
+把项目下载下来，里面有个sql文件，mysql数据库里先做成一个库uc_demo，把sql导入，然后项目中的application-local.yml文件修改下链接属性，启动项目，访问http://localhost:8088/login使用就可以 
+默认用户名/密码：admin/123456,验证码随便输入就好了，那是假的功能... 
+
 
